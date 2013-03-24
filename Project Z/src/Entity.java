@@ -12,23 +12,25 @@ public class Entity {
 	private String state;
 	private String entityName;
 	private int entityLevel;
-	private Image entityImage;
+	private Image entityImageLeft;
+	private Image entityImageRight;
 	
 	
-	public Entity(int entityX, int entityY,  int totalHitPoints, String entityName, int entityLevel, Image entityImage)	{
-		this(entityX, entityY, totalHitPoints, "alive" , entityName, entityLevel, entityImage);
+	public Entity(int entityX, int entityY,  int totalHitPoints, String entityName, int entityLevel, Image entityImageLeft)	{
+		this(entityX, entityY, totalHitPoints, "alive" , entityName, entityLevel, entityImageLeft);
 	}
 	
 	
 	
-	public Entity(int entityX, int entityY, int totalHitPoints, String state, String entityName, int entityLevel, Image entityImage)	{
+	public Entity(int entityX, int entityY, int totalHitPoints, String state, String entityName, int entityLevel, Image entityImageLeft)	{
 		this.entityX = entityX;
 		this.entityY = entityY;
 		this.totalHitPoints = totalHitPoints;
 		this.state = state;
 		this.setEntityName(entityName);
 		this.setEntityLevel(entityLevel);
-		this.setEntityImage(entityImage);
+		this.setEntityImageLeft(entityImageLeft);
+		this.setEntityImageRight(entityImageLeft.getFlippedCopy(true, false));
 	}
 	
 
@@ -105,13 +107,25 @@ public class Entity {
 
 
 
-	public Image getEntityImage() {
-		return entityImage;
+	public Image getEntityImageLeft() {
+		return entityImageLeft;
 	}
 
 
 
-	public void setEntityImage(Image entityImage) {
-		this.entityImage = entityImage;
+	public void setEntityImageLeft(Image entityImageLeft) {
+		this.entityImageLeft = entityImageLeft;
+	}
+
+
+
+	public Image getEntityImageRight() {
+		return entityImageRight;
+	}
+
+
+
+	public void setEntityImageRight(Image entityImageRight) {
+		this.entityImageRight = entityImageRight;
 	}
 }

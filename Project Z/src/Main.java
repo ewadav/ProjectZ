@@ -16,6 +16,7 @@ public class Main extends BasicGame {
 	private Player player;
 	private int playerX;
 	private int playerY;
+	private Image playerImage;
 	
 
 	
@@ -31,25 +32,28 @@ public class Main extends BasicGame {
 		playerY = 150;
 		player = new Player(playerX, playerY, 100, "Alive", "Timmy", 1, new Image("res/TileSheets/Tangyoon/tangyoon_open.png"),120);
 		map = new TiledMap("res/maps/level.tmx");
+		playerImage = player.getEntityImageLeft();
 	}
 
 	
 	
 	public void update (GameContainer container, int delta) throws SlickException  {
 		if (container.getInput().isKeyDown(Input.KEY_LEFT)) { // Move Left
-			playerX--;
+			playerX-= (.2 * delta);
 			updatePlayerPosition();
+			playerImage = player.getEntityImageLeft();
 		}
 		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) { // Move Right
-			playerX++;
+			playerX+= (.2 * delta);
 			updatePlayerPosition();
+			playerImage = player.getEntityImageRight();
 		}
 		if (container.getInput().isKeyDown(Input.KEY_UP)) { // Move Up
-			playerY--;
+			playerY-= (.2 * delta);
 			updatePlayerPosition();
 		}
 		if (container.getInput().isKeyDown(Input.KEY_DOWN)) { // Move Down
-			playerY++;
+			playerY+= (.2 * delta);
 			updatePlayerPosition();
 		}
 	}
@@ -57,7 +61,6 @@ public class Main extends BasicGame {
 	
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		map.render(0, 0);
-		Image playerImage = player.getEntityImage();
 		playerImage.draw(playerX, playerY);
 	}
 

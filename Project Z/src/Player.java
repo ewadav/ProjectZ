@@ -15,9 +15,9 @@ public class Player extends Entity{
 	
 	
 	public Player(int entityX, int entityY, int totalHitPoints, String state,
-			String entityName, int entityLevel, Image entityImage, int totalMana) {
+			String entityName, int entityLevel, Image entityImageLeft, int totalMana) {
 		
-		super(entityX, entityY, totalHitPoints, state, entityName, entityLevel, entityImage); // Sets all superclass fields
+		super(entityX, entityY, totalHitPoints, state, entityName, entityLevel, entityImageLeft); // Sets all superclass fields
 		
 		this.totalMana = totalMana;
 		this.currentMana = totalMana;
