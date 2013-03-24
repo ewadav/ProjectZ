@@ -1,5 +1,8 @@
+// David Ewald & Brandon Roth 'Project Z' 2013
+//
+//
 
-
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -10,6 +13,10 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
 public class Main extends BasicGame {
+	private TiledMap map;
+	private Animation player;
+	private int playerX;
+	private int playerY;
 	
 
 	
@@ -20,7 +27,10 @@ public class Main extends BasicGame {
 	
 	@Override
 	public void init(GameContainer container) throws SlickException  {
-	
+		playerX = 150;
+		playerY = 150;
+		
+		
 	}
 
 	
