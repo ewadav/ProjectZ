@@ -2,10 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/B.Roth/Documents/GitHub/ProjectZ/Project Z/slick.jar"/>
-	<classpathentry kind="lib" path="C:/Users/B.Roth/Documents/GitHub/ProjectZ/Project Z/lwjgl.jar">
+	<classpathentry kind="lib" path="slick.jar"/>
+	<classpathentry kind="lib" path="lwjgl.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Project Z/lib"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/David/Documents/GitHub/ProjectZ/Project Z/lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>

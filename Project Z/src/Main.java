@@ -29,7 +29,7 @@ public class Main extends BasicGame {
 		container.setVSync(true);
 		playerX = 150;
 		playerY = 150;
-		player = new Player(playerX, playerY, 100, "Alive", "Timmy", 1, new Image("res/TileSheets/Tangyoon/tangyoon.png"),120);
+		player = new Player(playerX, playerY, 100, "Alive", "Timmy", 1, new Image("res/TileSheets/Tangyoon/tangyoon_open.png"),120);
 		map = new TiledMap("res/maps/level.tmx");
 	}
 
