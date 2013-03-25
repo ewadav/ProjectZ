@@ -48,7 +48,7 @@ public class Main extends BasicGame {
 	public void update (GameContainer container, int delta) throws SlickException  {
 		if (container.getInput().isKeyDown(Input.KEY_LEFT)) { // Move Left
 			playerX -= Math.round(.5 + .2 * delta);
-			if(playerX < 0)	{ 					// Off screen - will not update
+			if(playerX < 0)	{ 							// Off screen - will not update
 				playerX += Math.round(.5 + .2 * delta);
 			}
 			updatePlayerPosition();
@@ -68,7 +68,7 @@ public class Main extends BasicGame {
 		}
 		if (container.getInput().isKeyDown(Input.KEY_UP)) { // Move Up
 			playerY -= Math.round(.5 + .2 * delta);
-			if(playerY < 0)	{ 					// Off screen - will not update
+			if(playerY < 0)	{ 							// Off screen - will not update
 				playerY += Math.round(.5 + .2 * delta);
 			}
 			updatePlayerPosition();
@@ -81,14 +81,14 @@ public class Main extends BasicGame {
 			updatePlayerPosition();
 		}
 		
-		//playerY + player.currentimage.getHeight - 
-		//player.getEntityCurrentImage().getCenterOfRotationX()
+		// Monster chases in the X direction
 		if(playerX + player.getEntityCurrentImage().getWidth()*4/5 < monster.getEntityX())	{
 			monster.setEntityX((int)Math.round( .5 + monster.getEntityX() - (monster.getMoveSpeed() * delta)));	
 		}else if (playerX - player.getEntityCurrentImage().getWidth()*1/5 > monster.getEntityX())	{
 			monster.setEntityX((int)Math.round(monster.getEntityX() - .5 + (monster.getMoveSpeed() * delta)));	
 		} 
-		//+ player.getEntityCurrentImage().getHeight()*4/5
+		
+		// Monster chases in the Y direction
 		if(playerY < monster.getEntityY() + (monster.getEntityCurrentImage().getHeight() - player.getEntityCurrentImage().getHeight()))	{
 			monster.setEntityY((int)Math.round( .5 + monster.getEntityY() - (monster.getMoveSpeed() * delta)));	
 		}else if (playerY > monster.getEntityY() + (monster.getEntityCurrentImage().getHeight() - player.getEntityCurrentImage().getHeight()))	{
@@ -108,8 +108,7 @@ public class Main extends BasicGame {
 	
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer container = new AppGameContainer(new Main(), 1280, 720, false);
-			container.start();
-
+		container.start();
 	}
 	
 	
@@ -134,5 +133,8 @@ public class Main extends BasicGame {
 		Random generator = new Random();
 		monster = new Monster(generator.nextInt(mapWidth),generator.nextInt(mapHeight), 250, "Alive", "JrCactus", 3, new Image("res/TileSheets/jrcactus/jrcactus_still.png"), 30, 7, .11);
 	}
+	
+	
+	
 
 }

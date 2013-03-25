@@ -5,6 +5,7 @@
 import org.newdawn.slick.Image;
 
 public class Item {
+	
 	private String itemName;
 	private int itemWorth;
 	private Image itemImage;

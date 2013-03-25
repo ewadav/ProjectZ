@@ -6,7 +6,6 @@ import org.newdawn.slick.Image;
 
 public class Monster extends Entity{
 	
-
 	private int upperDamageBound;
 	private int moneyDrop;
 	private int armor;
