@@ -11,16 +11,18 @@ public class Monster extends Entity{
 	private int moneyDrop;
 	private int armor;
 	private int currentHitPoints;
+	private double moveSpeed;
 	
 	public Monster(int entityX, int entityY, int totalHitPoints, String state,
 			String entityName, int entityLevel, Image entityImage, int upperDamageBound,
-			int armor) {
+			int armor, double moveSpeed) {
 		super(entityX, entityY, totalHitPoints, state, entityName, entityLevel,
 				entityImage);
 		this.upperDamageBound = upperDamageBound;
 		this.moneyDrop = entityLevel * 10;
 		this.armor = armor;
 		this.currentHitPoints = totalHitPoints;
+		this.moveSpeed = moveSpeed;
 		
 		
 	}
@@ -57,6 +59,18 @@ public class Monster extends Entity{
 	
 	public void setCurrentHitPoints(int currentHitPoints) {
 		this.currentHitPoints = currentHitPoints;
+	}
+
+
+
+	public double getMoveSpeed() {
+		return moveSpeed;
+	}
+
+
+
+	public void setMoveSpeed(int moveSpeed) {
+		this.moveSpeed = moveSpeed;
 	}
 	
 	
