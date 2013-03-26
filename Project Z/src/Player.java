@@ -4,6 +4,7 @@
 
 import org.newdawn.slick.Image;
 
+
 public class Player extends Entity{
 	
 	private double money;
@@ -12,6 +13,7 @@ public class Player extends Entity{
 	private int currentHitPoints;
 	private int experienceToLvlUp;
 	private int currentExperience;
+	
 	
 	
 	public Player(int entityX, int entityY, int totalHitPoints, String state,
@@ -24,6 +26,7 @@ public class Player extends Entity{
 		this.currentHitPoints = totalHitPoints;
 		this.experienceToLvlUp = 100;     // Hardcode some shit here   <--------!!!!!
 		this.currentExperience = 0;
+		
 	}
 	
 	
@@ -74,7 +77,8 @@ public class Player extends Entity{
 	public void setCurrentExperience(int currentExperience) {
 		this.currentExperience = currentExperience;
 	}
-	
+
+
 	
 	
 }

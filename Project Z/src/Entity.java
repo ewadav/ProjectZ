@@ -3,6 +3,7 @@
 // Keeps track of X and Y positions, as well as total hit points and state
 
 import org.newdawn.slick.Image;
+import org.newdawn.slick.geom.Polygon;
 
 public class Entity {
 
@@ -15,6 +16,7 @@ public class Entity {
 	private Image entityImageLeft;
 	private Image entityImageRight;
 	private Image entityCurrentImage;
+	private Polygon entityPoly;
 	
 	
 	public Entity(int entityX, int entityY,  int totalHitPoints, String entityName, int entityLevel, Image entityImageLeft)	{
@@ -32,7 +34,9 @@ public class Entity {
 		this.entityLevel = entityLevel;
 		this.entityImageLeft = entityImageLeft;
 		this.entityImageRight = entityImageLeft.getFlippedCopy(true, false);
-		this.setEntityCurrentImage(entityImageLeft);
+		this.entityCurrentImage = entityImageLeft;
+		this.entityPoly = new Polygon(new float[] {
+				1, 1, this.getEntityCurrentImage().getWidth(), 1, this.getEntityCurrentImage().getWidth(), this.getEntityCurrentImage().getHeight(), 1, this.getEntityCurrentImage().getHeight()});
 	}
 	
 
@@ -141,5 +145,17 @@ public class Entity {
 
 	public void setEntityCurrentImage(Image entityCurrentImage) {
 		this.entityCurrentImage = entityCurrentImage;
+	}
+
+
+
+	public Polygon getEntityPoly() {
+		return entityPoly;
+	}
+
+
+
+	public void setEntityPoly(Polygon entityPoly) {
+		this.entityPoly = entityPoly;
 	}
 }

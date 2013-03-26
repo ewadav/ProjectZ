@@ -1,6 +1,7 @@
 // David Ewald & Brandon Roth 'Project Z' 2013
+// Main file in charge of game management
 //
-//
+
 import java.util.*;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -9,10 +10,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.tiled.TiledMap;
+
 
 public class Main extends BasicGame {
-	private TiledMap map;
+	private BlockMap map;
 	private Player player;
 	private int playerX;
 	private int playerY;
@@ -20,6 +21,7 @@ public class Main extends BasicGame {
 	private int mapHeight;
 	private boolean jumping;
 	private Monster monster;
+	private double verticalSpeed;
 	
 	
 
@@ -32,77 +34,33 @@ public class Main extends BasicGame {
 	
 	public void init(GameContainer container) throws SlickException  {
 		container.setVSync(true);
+		map = new BlockMap("res/maps/level.tmx");
 		playerX = 150;
 		playerY = 150;
-		mapWidth = 1280;
-		mapHeight = 720;
+		mapWidth = map.getMapWidth();
+		mapHeight = map.getMapHeight();
 		jumping = false;
-		map = new TiledMap("res/maps/level.tmx");
 		createPlayers();
 		createMonsters();
-		
 	}
 
 	
 	
 	public void update (GameContainer container, int delta) throws SlickException  {
-		if (container.getInput().isKeyDown(Input.KEY_LEFT)) { // Move Left
-			playerX -= Math.round(.5 + .2 * delta);
-			if(playerX < 0)	{ 							// Off screen - will not update
-				playerX += Math.round(.5 + .2 * delta);
-			}
-			updatePlayerPosition();
-			player.setEntityCurrentImage(player.getEntityImageLeft());
-			
-			System.out.println("Flipped Left");
+		bringUpMenu(container);
+		if(!container.isPaused())	{
+			movementHandler(container, delta);
+			monsterChasingAi(delta);	// Monster chasing player
 		}
-		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) { // Move Right
-			playerX += Math.round(.5 + .2 * delta);
-			if(playerX + 135 > mapWidth)	{ 			// Off screen - will not update
-				playerX -= Math.round(.5 + .2 * delta);
-			}
-			updatePlayerPosition();
-			player.setEntityCurrentImage(player.getEntityImageRight());
-			
-			System.out.println("Flipped Right");
-		}
-		if (container.getInput().isKeyDown(Input.KEY_UP)) { // Move Up
-			playerY -= Math.round(.5 + .2 * delta);
-			if(playerY < 0)	{ 							// Off screen - will not update
-				playerY += Math.round(.5 + .2 * delta);
-			}
-			updatePlayerPosition();
-		}
-		if (container.getInput().isKeyDown(Input.KEY_DOWN)) { // Move Down
-			playerY += Math.round(.5 + .2 * delta);
-			if(playerY + 110 > mapHeight)	{			 // Off screen - will not update
-				playerY -= Math.round(.5 + .2 * delta);
-			}
-			updatePlayerPosition();
-		}
-		
-		// Monster chases in the X direction
-		if(playerX + player.getEntityCurrentImage().getWidth()*4/5 < monster.getEntityX())	{
-			monster.setEntityX((int)Math.round( .5 + monster.getEntityX() - (monster.getMoveSpeed() * delta)));	
-		}else if (playerX - player.getEntityCurrentImage().getWidth()*1/5 > monster.getEntityX())	{
-			monster.setEntityX((int)Math.round(monster.getEntityX() - .5 + (monster.getMoveSpeed() * delta)));	
-		} 
-		
-		// Monster chases in the Y direction
-		if(playerY < monster.getEntityY() + (monster.getEntityCurrentImage().getHeight() - player.getEntityCurrentImage().getHeight()))	{
-			monster.setEntityY((int)Math.round( .5 + monster.getEntityY() - (monster.getMoveSpeed() * delta)));	
-		}else if (playerY > monster.getEntityY() + (monster.getEntityCurrentImage().getHeight() - player.getEntityCurrentImage().getHeight()))	{
-			monster.setEntityY((int)Math.round(monster.getEntityY() - .5 + (monster.getMoveSpeed() * delta)));	
-		} 
-		
 	}
 
 	
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		map.render(0, 0);
-		player.getEntityCurrentImage().draw(playerX, playerY);
-		monster.getEntityCurrentImage().draw(monster.getEntityX(), monster.getEntityY());
-		g.drawString(player.getEntityName() , playerX + 30, playerY + 105);
+			map.getTileMap().render(0, 0);
+			player.getEntityCurrentImage().draw(playerX, playerY);
+			monster.getEntityCurrentImage().draw(monster.getEntityX(), monster.getEntityY());
+			g.drawString(player.getEntityName() , playerX + 30, playerY + 105);
+		
 	}
 
 	
@@ -129,12 +87,96 @@ public class Main extends BasicGame {
 		player = new Player(playerX, playerY, 100, "Alive", "Tangyoon", 1, new Image("res/TileSheets/Tangyoon/tangyoon_open.png"),120);
 	}
 	
+	// Creates monsters on the map
 	private void createMonsters() throws SlickException	{
 		Random generator = new Random();
 		monster = new Monster(generator.nextInt(mapWidth),generator.nextInt(mapHeight), 250, "Alive", "JrCactus", 3, new Image("res/TileSheets/jrcactus/jrcactus_still.png"), 30, 7, .11);
 	}
 	
 	
+	// Makes monsters chase player according to move speed and delta
+	private void monsterChasingAi(int delta)	{
+		// Monster chases in the X direction
+		if(playerX + player.getEntityCurrentImage().getWidth()*4/5 < monster.getEntityX())	{
+			monster.setEntityX((int)Math.round( .5 + monster.getEntityX() - (monster.getMoveSpeed() * delta)));	
+		}else if (playerX - player.getEntityCurrentImage().getWidth()*1/5 > monster.getEntityX())	{
+			monster.setEntityX((int)Math.round(monster.getEntityX() - .5 + (monster.getMoveSpeed() * delta)));	
+		} 
+		
+		// Monster chases in the Y direction
+		if(playerY < monster.getEntityY() + (monster.getEntityCurrentImage().getHeight() - player.getEntityCurrentImage().getHeight()))	{
+			monster.setEntityY((int)Math.round( .5 + monster.getEntityY() - (monster.getMoveSpeed() * delta)));	
+		}else if (playerY > monster.getEntityY() + (monster.getEntityCurrentImage().getHeight() - player.getEntityCurrentImage().getHeight()))	{
+			monster.setEntityY((int)Math.round(monster.getEntityY() - .5 + (monster.getMoveSpeed() * delta)));	
+		} 
 	
-
+	}
+	
+	// Handles all the player movement inputs
+	private void movementHandler(GameContainer container, int delta)	{
+		
+		if (container.getInput().isKeyDown(Input.KEY_LEFT)) { // Move Left
+			playerX -= Math.round(.5 + .2 * delta);
+			if(playerX < 0)	{ 							// Off screen - will not update
+				playerX += Math.round(.5 + .2 * delta);
+			}
+			
+			player.setEntityCurrentImage(player.getEntityImageLeft());
+			
+			System.out.println("Flipped Left");
+		}
+		
+		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) { // Move Right
+			playerX += Math.round(.5 + .2 * delta);
+			if(playerX + 135 > mapWidth)	{ 			// Off screen - will not update
+				playerX -= Math.round(.5 + .2 * delta);
+			}
+			
+			player.setEntityCurrentImage(player.getEntityImageRight());
+			
+			System.out.println("Flipped Right");
+		}
+		
+		
+		if (container.getInput().isKeyDown(Input.KEY_UP) && !jumping) { // Move Up
+			verticalSpeed = -1.0 * delta; // Initial velocity
+			jumping = true;
+			playerY += verticalSpeed;
+			
+		}
+		
+		if(jumping)	{
+			verticalSpeed +=.035 * delta;  // Gravity factor
+			playerY += verticalSpeed;
+			updatePlayerPosition();
+		}
+		
+		if(playerY < 0 || playerY > mapHeight - player.getEntityCurrentImage().getHeight())	{ 							// Off screen - will not update
+			jumping = false;
+			verticalSpeed = 0.0;
+			playerY -= verticalSpeed;
+			
+		}
+		
+		if (container.getInput().isKeyDown(Input.KEY_DOWN)) { // Move Down
+			playerY += Math.round(.5 + .2 * delta);
+			if(playerY + 110 > mapHeight)	{			 // Off screen - will not update
+				playerY -= Math.round(.5 + .2 * delta);
+			}
+			
+		}
+		updatePlayerPosition();
+	}
+	
+	private void bringUpMenu(GameContainer container)	{
+		if(container.getInput().isKeyPressed(Input.KEY_ESCAPE))	{
+			if(container.isPaused())	{
+				container.resume();
+			}else{
+				container.pause();
+			}
+		}
+	}
+	
+	
 }
