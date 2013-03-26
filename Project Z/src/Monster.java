@@ -3,6 +3,7 @@
 //
 
 import org.newdawn.slick.Image;
+import org.newdawn.slick.geom.Polygon;
 
 public class Monster extends Entity{
 	
@@ -14,9 +15,9 @@ public class Monster extends Entity{
 	
 	public Monster(int entityX, int entityY, int totalHitPoints, String state,
 			String entityName, int entityLevel, Image entityImage, int upperDamageBound,
-			int armor, double moveSpeed) {
+			int armor, double moveSpeed, Polygon poly) {
 		super(entityX, entityY, totalHitPoints, state, entityName, entityLevel,
-				entityImage);
+				entityImage, poly);
 		this.upperDamageBound = upperDamageBound;
 		this.moneyDrop = entityLevel * 10;
 		this.armor = armor;

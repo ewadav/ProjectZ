@@ -19,13 +19,13 @@ public class Entity {
 	private Polygon entityPoly;
 	
 	
-	public Entity(int entityX, int entityY,  int totalHitPoints, String entityName, int entityLevel, Image entityImageLeft)	{
-		this(entityX, entityY, totalHitPoints, "alive" , entityName, entityLevel, entityImageLeft);
+	public Entity(int entityX, int entityY,  int totalHitPoints, String entityName, int entityLevel, Image entityImageLeft, Polygon entityPoly)	{
+		this(entityX, entityY, totalHitPoints, "alive" , entityName, entityLevel, entityImageLeft, entityPoly);
 	}
 	
 	
 	
-	public Entity(int entityX, int entityY, int totalHitPoints, String state, String entityName, int entityLevel, Image entityImageLeft)	{
+	public Entity(int entityX, int entityY, int totalHitPoints, String state, String entityName, int entityLevel, Image entityImageLeft, Polygon entityPoly)	{
 		this.entityX = entityX;
 		this.entityY = entityY;
 		this.totalHitPoints = totalHitPoints;
@@ -35,8 +35,7 @@ public class Entity {
 		this.entityImageLeft = entityImageLeft;
 		this.entityImageRight = entityImageLeft.getFlippedCopy(true, false);
 		this.entityCurrentImage = entityImageLeft;
-		this.entityPoly = new Polygon(new float[] {
-				1, 1, this.getEntityCurrentImage().getWidth(), 1, this.getEntityCurrentImage().getWidth(), this.getEntityCurrentImage().getHeight(), 1, this.getEntityCurrentImage().getHeight()});
+		this.entityPoly = entityPoly;
 	}
 	
 
@@ -49,6 +48,7 @@ public class Entity {
 
 	public void setEntityX(int entityX) {
 		this.entityX = entityX;
+		entityPoly.setX(entityX);
 	}
 
 
@@ -61,6 +61,7 @@ public class Entity {
 
 	public void setEntityY(int entityY) {
 		this.entityY = entityY;
+		entityPoly.setY(entityY);
 	}
 
 

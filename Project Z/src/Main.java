@@ -10,6 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Polygon;
 
 
 public class Main extends BasicGame {
@@ -47,7 +48,7 @@ public class Main extends BasicGame {
 	
 	
 	public void update (GameContainer container, int delta) throws SlickException  {
-		bringUpMenu(container);
+		checkGameState(container);
 		if(!container.isPaused())	{
 			movementHandler(container, delta);
 			monsterChasingAi(delta);	// Monster chasing player
@@ -78,19 +79,34 @@ public class Main extends BasicGame {
 	private void updatePlayerPosition()	{
 		player.setEntityX(playerX);
 		player.setEntityY(playerY);
-		System.out.println(player.getEntityX() + " " + player.getEntityY());
+		System.out.println("Player X = " + player.getEntityX() + " Player Y = " + player.getEntityY());
+		System.out.println("Player Poly X = " + player.getEntityPoly().getX() + " Player Poly Y = " + player.getEntityPoly().getY());
 	}
 	
 	
 	// Creates the players on the map
 	private void createPlayers() throws SlickException	{
-		player = new Player(playerX, playerY, 100, "Alive", "Tangyoon", 1, new Image("res/TileSheets/Tangyoon/tangyoon_open.png"),120);
+		Image playerImage = new Image("res/TileSheets/Tangyoon/tangyoon_open.png");
+		Polygon poly = new Polygon(new float[] {
+				playerX, playerY, 
+				playerX + playerImage.getWidth(), playerY, 
+				playerImage.getWidth(), playerImage.getHeight(),
+				playerX, playerImage.getHeight()});
+		player = new Player(playerX, playerY, 100, "Alive", "Tangyoon", 1, playerImage,120, poly);
 	}
 	
 	// Creates monsters on the map
 	private void createMonsters() throws SlickException	{
+		Image monsterImage = new Image("res/TileSheets/jrcactus/jrcactus_still.png");
 		Random generator = new Random();
-		monster = new Monster(generator.nextInt(mapWidth),generator.nextInt(mapHeight), 250, "Alive", "JrCactus", 3, new Image("res/TileSheets/jrcactus/jrcactus_still.png"), 30, 7, .11);
+		int monsterX = generator.nextInt(mapWidth);
+		int monsterY = generator.nextInt(mapHeight);
+		Polygon poly = new Polygon(new float[] {
+				monsterX, monsterY, 
+				monsterX + monsterImage.getWidth(),monsterY, 
+				monsterImage.getWidth(), monsterImage.getHeight(),
+				monsterX, monsterImage.getHeight()});
+		monster = new Monster(monsterX, monsterY, 250, "Alive", "JrCactus", 3, monsterImage, 30, 7, .11, poly);
 	}
 	
 	
@@ -113,42 +129,53 @@ public class Main extends BasicGame {
 	}
 	
 	// Handles all the player movement inputs
-	private void movementHandler(GameContainer container, int delta)	{
+	private void movementHandler(GameContainer container, int delta) throws SlickException	{
 		
 		if (container.getInput().isKeyDown(Input.KEY_LEFT)) { // Move Left
 			playerX -= Math.round(.5 + .2 * delta);
+			
 			if(playerX < 0)	{ 							// Off screen - will not update
 				playerX += Math.round(.5 + .2 * delta);
+				
 			}
 			
 			player.setEntityCurrentImage(player.getEntityImageLeft());
-			
 			System.out.println("Flipped Left");
 		}
 		
 		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) { // Move Right
 			playerX += Math.round(.5 + .2 * delta);
-			if(playerX + 135 > mapWidth)	{ 			// Off screen - will not update
+			
+			if(playerX + player.getEntityCurrentImage().getWidth() > mapWidth)	{ 			// Off screen - will not update
 				playerX -= Math.round(.5 + .2 * delta);
+				
 			}
 			
 			player.setEntityCurrentImage(player.getEntityImageRight());
-			
 			System.out.println("Flipped Right");
 		}
 		
 		
-		if (container.getInput().isKeyDown(Input.KEY_UP) && !jumping) { // Move Up
-			verticalSpeed = -1.0 * delta; // Initial velocity
+		if (container.getInput().isKeyPressed(Input.KEY_SPACE) && !jumping) { // Move Up
+			verticalSpeed = -0.75 * delta; // Initial velocity
 			jumping = true;
 			playerY += verticalSpeed;
+			
 			
 		}
 		
 		if(jumping)	{
 			verticalSpeed +=.035 * delta;  // Gravity factor
 			playerY += verticalSpeed;
-			updatePlayerPosition();
+			
+			
+			//if(entityCollision())	{
+				//playerY -= verticalSpeed;
+				//verticalSpeed = 0;
+				//jumping = false;
+				//player.getEntityPoly().setY(playerY);
+			//}
+			
 		}
 		
 		if(playerY < 0 || playerY > mapHeight - player.getEntityCurrentImage().getHeight())	{ 							// Off screen - will not update
@@ -156,19 +183,22 @@ public class Main extends BasicGame {
 			verticalSpeed = 0.0;
 			playerY -= verticalSpeed;
 			
+			
 		}
 		
 		if (container.getInput().isKeyDown(Input.KEY_DOWN)) { // Move Down
 			playerY += Math.round(.5 + .2 * delta);
-			if(playerY + 110 > mapHeight)	{			 // Off screen - will not update
+			
+			if(playerY + player.getEntityCurrentImage().getHeight() > mapHeight)	{			 // Off screen - will not update
 				playerY -= Math.round(.5 + .2 * delta);
+				
 			}
 			
 		}
 		updatePlayerPosition();
 	}
 	
-	private void bringUpMenu(GameContainer container)	{
+	private void checkGameState(GameContainer container)	{
 		if(container.getInput().isKeyPressed(Input.KEY_ESCAPE))	{
 			if(container.isPaused())	{
 				container.resume();
@@ -176,18 +206,20 @@ public class Main extends BasicGame {
 				container.pause();
 			}
 		}
+		if(container.getInput().isKeyPressed(Input.KEY_GRAVE))	{
+			container.exit();
+		}
 	}
 	
-	private String entityCollision() throws SlickException	{
+	private boolean entityCollision() throws SlickException	{
 		List<Block> colideableBlocks = map.getColideableBlocks(); 
 		for (int i = 0; i < colideableBlocks.size(); i++) {
-	            Block currentBlock = (Block) colideableBlocks.get(i);
+	            Block currentBlock = colideableBlocks.get(i);
 	            if (player.getEntityPoly().intersects(currentBlock.getBlockPoly())) {
-	            	return currentBlock.getBlockType();
+	            	return true;
 	            }
 		}
-		return "";
+		return false;
 	}
-	
 	
 }

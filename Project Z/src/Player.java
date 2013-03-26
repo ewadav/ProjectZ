@@ -3,6 +3,7 @@
 //
 
 import org.newdawn.slick.Image;
+import org.newdawn.slick.geom.Polygon;
 
 
 public class Player extends Entity{
@@ -17,9 +18,9 @@ public class Player extends Entity{
 	
 	
 	public Player(int entityX, int entityY, int totalHitPoints, String state,
-			String entityName, int entityLevel, Image entityImageLeft, int totalMana) {
+			String entityName, int entityLevel, Image entityImageLeft, int totalMana, Polygon poly) {
 		
-		super(entityX, entityY, totalHitPoints, state, entityName, entityLevel, entityImageLeft); // Sets all superclass fields
+		super(entityX, entityY, totalHitPoints, state, entityName, entityLevel, entityImageLeft, poly); // Sets all superclass fields
 		
 		this.totalMana = totalMana;
 		this.currentMana = totalMana;

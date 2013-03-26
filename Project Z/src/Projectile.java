@@ -1,5 +1,6 @@
 // David Ewald & Brandon Roth 'Project Z' 2013
-
+// This class is teh superclass for all projectiles and ranged attacks
+// Keeps track of visibility, position, image, speed, and damage
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Polygon;
