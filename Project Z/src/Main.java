@@ -211,6 +211,7 @@ public class Main extends BasicGame {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private boolean entityCollision() throws SlickException	{
 		List<Block> colideableBlocks = map.getColideableBlocks(); 
 		for (int i = 0; i < colideableBlocks.size(); i++) {

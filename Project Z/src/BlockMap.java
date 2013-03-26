@@ -24,9 +24,9 @@ public class BlockMap {
 		
 	    for (int x = 0; x < this.tileMap.getWidth(); x++) {
 	        for (int y = 0; y < this.tileMap.getHeight(); y++) {
-	        	int tileId = this.tileMap.getTileId(x, y, this.tileMap.getLayerIndex("collision"));
+	        	int tileId = this.tileMap.getTileId(x, y, this.tileMap.getLayerIndex("Tile Layer 1"));
 	        	if(this.tileMap.getTileProperty(tileId, "blocked", "true").equals("true"))	{
-	        		colideableBlocks.add( new Block(x * 16, y* 16, blockSize, "Block", 1.0));
+	        		colideableBlocks.add(new Block(x * 16, y* 16, blockSize, "Block", 1.0));
 	        	}
 	        	
 	        }
