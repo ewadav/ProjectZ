@@ -178,5 +178,16 @@ public class Main extends BasicGame {
 		}
 	}
 	
+	private String entityCollision() throws SlickException	{
+		List<Block> colideableBlocks = map.getColideableBlocks(); 
+		for (int i = 0; i < colideableBlocks.size(); i++) {
+	            Block currentBlock = (Block) colideableBlocks.get(i);
+	            if (player.getEntityPoly().intersects(currentBlock.getBlockPoly())) {
+	            	return currentBlock.getBlockType();
+	            }
+		}
+		return "";
+	}
+	
 	
 }

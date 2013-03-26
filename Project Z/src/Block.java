@@ -10,8 +10,9 @@ public class Block {
 	private String blockType;
 	private int blockX;
 	private int blockY;
+	private double speedMultiplier;
 	
-	public Block(int x, int y, int test[], String type)	{
+	public Block(int x, int y, int test[], String type, double speedMultiplier)	{
 		 blockPoly = new Polygon(new float[]{
 		            x+test[0], y+test[1],
 		            x+test[2], y+test[3],
@@ -20,6 +21,7 @@ public class Block {
 		blockType = type;
 		blockX = x;
 		blockY = y;
+		this.speedMultiplier = speedMultiplier;
 		
 	}
 	
@@ -60,6 +62,14 @@ public class Block {
 
 	public void setBlockY(int blockY) {
 		this.blockY = blockY;
+	}
+
+	public double getSpeedMultiplier() {
+		return speedMultiplier;
+	}
+
+	public void setSpeedMultiplier(double speedMultiplier) {
+		this.speedMultiplier = speedMultiplier;
 	}
 	
 }
