@@ -1,84 +1,1116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="80" height="45" tilewidth="16" tileheight="16">
- <tileset firstgid="1" name="bluetoycastle_core1" tilewidth="16" tileheight="16">
-  <image source="../TileSheets/bluetoycastle/bluetoycastle_core1.png" width="90" height="60"/>
- </tileset>
- <tileset firstgid="16" name="bluetoycastle_core2" tilewidth="16" tileheight="16">
-  <image source="../TileSheets/bluetoycastle/bluetoycastle_core2.png" width="90" height="60"/>
- </tileset>
- <tileset firstgid="31" name="bluetoycastle_core3" tilewidth="16" tileheight="16">
-  <image source="../TileSheets/bluetoycastle/bluetoycastle_core3.png" width="90" height="60"/>
- </tileset>
- <tileset firstgid="46" name="bluetoycastle_core4" tilewidth="16" tileheight="16">
-  <image source="../TileSheets/bluetoycastle/bluetoycastle_core4.png" width="90" height="60"/>
- </tileset>
- <tileset firstgid="61" name="bluetoycastle_core5" tilewidth="16" tileheight="16">
-  <image source="../TileSheets/bluetoycastle/bluetoycastle_core5.png" width="90" height="60"/>
- </tileset>
- <tileset firstgid="76" name="bluetoycastle_corner1" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="bluetoycastle_corner1" tilewidth="16" tileheight="16">
   <image source="../TileSheets/bluetoycastle/bluetoycastle_corner1.png" width="90" height="76"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
  </tileset>
- <tileset firstgid="96" name="bluetoycastle_corner2" tilewidth="16" tileheight="16">
+ <tileset firstgid="21" name="bluetoycastle_corner2" tilewidth="16" tileheight="16">
   <image source="../TileSheets/bluetoycastle/bluetoycastle_corner2.png" width="90" height="75"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
  </tileset>
- <tileset firstgid="116" name="bluetoycastle_corner3" tilewidth="16" tileheight="16">
+ <tileset firstgid="41" name="bluetoycastle_corner3" tilewidth="16" tileheight="16">
   <image source="../TileSheets/bluetoycastle/bluetoycastle_corner3.png" width="90" height="76"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
  </tileset>
- <tileset firstgid="136" name="bluetoycastle_corner4" tilewidth="16" tileheight="16">
+ <tileset firstgid="61" name="bluetoycastle_corner4" tilewidth="16" tileheight="16">
   <image source="../TileSheets/bluetoycastle/bluetoycastle_corner4.png" width="90" height="78"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
  </tileset>
- <tileset firstgid="156" name="bluetoycastle_lside1" tilewidth="16" tileheight="16">
+ <tileset firstgid="81" name="bluetoycastle_lside1" tilewidth="16" tileheight="16">
   <image source="../TileSheets/bluetoycastle/bluetoycastle_lside1.png" width="33" height="60"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
  </tileset>
- <tileset firstgid="162" name="bluetoycastle_lside2" tilewidth="16" tileheight="16">
+ <tileset firstgid="87" name="bluetoycastle_lside2" tilewidth="16" tileheight="16">
   <image source="../TileSheets/bluetoycastle/bluetoycastle_lside2.png" width="33" height="60"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
  </tileset>
- <tileset firstgid="168" name="bluetoycastle_rside1" tilewidth="16" tileheight="16">
-  <image source="../TileSheets/bluetoycastle/bluetoycastle_rside1.png" width="22" height="60"/>
- </tileset>
- <tileset firstgid="171" name="bluetoycastle_rside2" tilewidth="16" tileheight="16">
-  <image source="../TileSheets/bluetoycastle/bluetoycastle_rside2.png" width="22" height="60"/>
- </tileset>
- <tileset firstgid="174" name="bluetoycastle_brick2" tilewidth="16" tileheight="16">
-  <image source="../TileSheets/bluetoycastle/bluetoycastle_brick2.png" width="55" height="18"/>
- </tileset>
- <tileset firstgid="177" name="bluetoycastle_platform1" tilewidth="16" tileheight="16">
+ <tileset firstgid="93" name="bluetoycastle_platform1" tilewidth="16" tileheight="16">
   <image source="../TileSheets/bluetoycastle/bluetoycastle_platform1.png" width="90" height="18"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
  </tileset>
- <tileset firstgid="182" name="bluetoycastle_platform2" tilewidth="16" tileheight="16">
+ <tileset firstgid="98" name="bluetoycastle_platform2" tilewidth="16" tileheight="16">
   <image source="../TileSheets/bluetoycastle/bluetoycastle_platform2.png" width="90" height="18"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
  </tileset>
- <tileset firstgid="187" name="bluetoycastle_platform3" tilewidth="16" tileheight="16">
+ <tileset firstgid="103" name="bluetoycastle_platform3" tilewidth="16" tileheight="16">
   <image source="../TileSheets/bluetoycastle/bluetoycastle_platform3.png" width="90" height="18"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
  </tileset>
- <tileset firstgid="192" name="bluetoycastle_platform4" tilewidth="16" tileheight="16">
+ <tileset firstgid="108" name="bluetoycastle_platform4" tilewidth="16" tileheight="16">
   <image source="../TileSheets/bluetoycastle/bluetoycastle_platform4.png" width="90" height="16"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
  </tileset>
- <tileset firstgid="197" name="bluetoycastle_platform5" tilewidth="16" tileheight="16">
+ <tileset firstgid="113" name="bluetoycastle_platform5" tilewidth="16" tileheight="16">
   <image source="../TileSheets/bluetoycastle/bluetoycastle_platform5.png" width="90" height="16"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
  </tileset>
- <tileset firstgid="202" name="bluetoycastle_platform6" tilewidth="16" tileheight="16">
+ <tileset firstgid="118" name="bluetoycastle_platform6" tilewidth="16" tileheight="16">
   <image source="../TileSheets/bluetoycastle/bluetoycastle_platform6.png" width="90" height="16"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
  </tileset>
- <tileset firstgid="207" name="bluetoycastle_brick1" tilewidth="16" tileheight="16">
-  <image source="../TileSheets/bluetoycastle/bluetoycastle_brick1.png" width="55" height="16"/>
+ <tileset firstgid="123" name="bluetoycastle_rside1" tilewidth="16" tileheight="16">
+  <image source="../TileSheets/bluetoycastle/bluetoycastle_rside1.png" width="22" height="60"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
   <tile id="2">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
   </tile>
  </tileset>
- <layer name="background" width="80" height="45">
+ <tileset firstgid="126" name="bluetoycastle_rside2" tilewidth="16" tileheight="16">
+  <image source="../TileSheets/bluetoycastle/bluetoycastle_rside2.png" width="22" height="60"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="129" name="bluetoycastle_brick1" tilewidth="16" tileheight="16">
+  <image source="../TileSheets/bluetoycastle/bluetoycastle_brick1.png" width="55" height="16"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="132" name="bluetoycastle_brick2" tilewidth="16" tileheight="16">
+  <image source="../TileSheets/bluetoycastle/bluetoycastle_brick2.png" width="55" height="18"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="135" name="bluetoycastle_core1" tilewidth="16" tileheight="16">
+  <image source="../TileSheets/bluetoycastle/bluetoycastle_core1.png" width="90" height="60"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="150" name="bluetoycastle_core2" tilewidth="16" tileheight="16">
+  <image source="../TileSheets/bluetoycastle/bluetoycastle_core2.png" width="90" height="60"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="165" name="bluetoycastle_core3" tilewidth="16" tileheight="16">
+  <image source="../TileSheets/bluetoycastle/bluetoycastle_core3.png" width="90" height="60"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="180" name="bluetoycastle_core4" tilewidth="16" tileheight="16">
+  <image source="../TileSheets/bluetoycastle/bluetoycastle_core4.png" width="90" height="60"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="195" name="bluetoycastle_core5" tilewidth="16" tileheight="16">
+  <image source="../TileSheets/bluetoycastle/bluetoycastle_core5.png" width="90" height="60"/>
+  <tile id="0">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="80" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAADwZkvEChtAOAAA
-  </data>
- </layer>
- <layer name="collision" width="80" height="45">
-  <properties>
-   <property name="blocked" value="true"/>
-  </properties>
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3TWQqCUBiGYZvn2v8ympbQtKu+y5BExDLC54H35vd44HiwKAAAAAAAAAAAAAB+b/+hDumYTunc6Qn4lr7f8af+ja7q2/0A/INLqWu6pXt6VKyrWtNm/39RPs/rmd49K6+rW9Nm/7r3v/XNB2mYRmmcJmaNZtM0S/O0SEuzRrNVWqdN2qadWaPZE1r7RQhAOAAA
+   H4sIAAAAAAAAC+3bR4sUQRjG8QIVVFAPehZUjAc96CdQwYA554DZNYeTqVEWc1izrmHMOa/ZNWddwzfyX+iy4/jWWNPVYbqnH/ix0HR1v110sTUzVT2VUr1Qh/t4gId4hAu4iEu4jCt4g7d4h/f4YDhvK7ZhO3Zgp6GtdExqa1uf1FY6T7qe1PYwjuAojuE4mqE5WqA3+uAxnuApnqEeV3EN13EDN/ERn/AZX/DVcN4u7MYe7MU+Q1vpmNTWtj6prXSedD2pbS1O4CRO4TRaohVaoy/64Tle4CVe4TVu4Tbu4C7uoQHf8B0/8NNwXg324wAO4pChrXRMamtbn9RWOk+6ntQ2hzM4i3M4jzZoi3bY/McWlaWUtEcHTMaUmGtJajZiKqbFXUhCswmjMSbuQhIaD2MxLuY6khr9/o3HhLgLSWg8lY1fl+j3r5LH7xIszfu7DMuxQjgmneOpyhm/hc+/EquwGmuw1sc112MiJgVUY7kkjL6SskElf/4cVV9JWaeSNX/O76so+8mUtI7fqJKG8Rtn9PwlSeO33OKp3/Nn/f3VXMzD/DgLSljy58+Fc8M5KuvT/8VTxefP0pw769Om6P+/pX7+zfq0Kfr/bxCffyu1T/X7Vymff8OIfv+y+bP/6N8/svmz/2TzZ7d4Kj3jdzpmYCZmYXYEx6pVMsev9GwLsBCLsBhVEdSRhPFb2Fdx9JMpnsp+P3KJ/v60kn8/ck3Y8+fqkK7rJ2HUoufP/TEAA0O4ftr7ryMGYTCGYGjA109r/3VCZ3TBMAzHCIzEqADvk8b+64pu6I4eqvg6YNeUUrNpbbW0/ti0tjqoWoqlsD7bdcB+UmrN0lpoaf1xfn1h1VKYekN9tuuAG3zc06XmxrXQOfXv+uOaiGtp7BdprbY0Zmz2CoRdc9DxU4vNvgrpnbTdK1AbQs1hxbaWxue13VchvZO2ewVy6u+x5bfmKFKsFul5bfdV2O65sd3DU2dZc9SRagnieW333Nju4ck/Vm79ZxqDLs9ru+fGdg+Py1hwua/L3iaX+/4CiD6SykA4AAA=
   </data>
  </layer>
 </map>
