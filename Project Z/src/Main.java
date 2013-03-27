@@ -3,6 +3,7 @@
 //
 
 import java.util.*;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -17,8 +18,6 @@ public class Main extends BasicGame {
 	
 	private BlockMap map;
 	private Player player;
-	private int mapWidth;
-	private int mapHeight;
 	private boolean jumping;
 	private Monster monster;
 	private double verticalSpeed;
@@ -46,8 +45,6 @@ public class Main extends BasicGame {
 	public void init(GameContainer container) throws SlickException  {
 		container.setVSync(true);
 		map = new BlockMap("res/maps/level.tmx");
-		mapWidth = map.getMapWidth();
-		mapHeight = map.getMapHeight();
 		createPlayers();
 		createMonsters();
 		createItems();
@@ -63,7 +60,6 @@ public class Main extends BasicGame {
 		if(!container.isPaused())	{
 			movementHandler(container, delta);
 			monsterChasingAi(delta);	// Monster chasing player
-			playerItemPickUp();
 		}
 	}
 
@@ -85,6 +81,7 @@ public class Main extends BasicGame {
 			g.drawString ("playerY: " + player.getEntityY(), 30, 145);
 			g.drawString ("PlayerPolyX: " + player.getEntityPoly().getX(), 30, 165);
 			g.drawString ("PlayerPolyY: " + player.getEntityPoly().getY(), 30, 185);
+			g.drawString ("PlayerMoney: " + player.getMoney(), 30, 205);
 	}
 
 	
@@ -122,8 +119,8 @@ public class Main extends BasicGame {
 	private void createMonsters() throws SlickException	{
 		Image monsterImage = new Image("res/TileSheets/jrcactus/jrcactus_still.png");
 		Random generator = new Random();
-		int monsterX = generator.nextInt(mapWidth);
-		int monsterY = generator.nextInt(mapHeight);
+		int monsterX = generator.nextInt(map.getMapWidth());
+		int monsterY = generator.nextInt(map.getMapHeight());
 		Polygon poly = new Polygon(new float[] {
 				monsterX, monsterY, 
 				monsterX + monsterImage.getWidth(),monsterY, 
@@ -142,7 +139,7 @@ public class Main extends BasicGame {
 				400 + testItemImage.getWidth(), 400, 
 				400 + testItemImage.getWidth(), 400 + testItemImage.getHeight(),
 				400, 400 + testItemImage.getHeight()});
-		Item testItem = new Item (400, 400, "alive", "Copper Meso", testItemImage, 1, testItemPoly);
+		Item testItem = new Item (400, 400, "alive", "Copper Meso", testItemImage, 14, testItemPoly);
 		itemsOnMap.add(testItem);
 	}
 	
@@ -184,7 +181,7 @@ public class Main extends BasicGame {
 		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) { // Move Right
 			int initialX = player.getEntityX();
 			player.setEntityX(player.getEntityX() + (int)Math.round( .5 + .2 * delta));
-			if(player.getEntityX() + player.getEntityCurrentImage().getWidth() > mapWidth) { // Off screen - will not update
+			if(player.getEntityX() + player.getEntityCurrentImage().getWidth() > map.getMapWidth()) { // Off screen - will not update
 				player.setEntityX(initialX);
 			}
 			
@@ -209,7 +206,7 @@ public class Main extends BasicGame {
 			//}
 		}
 		
-		if(player.getEntityY() < 0 || player.getEntityY() > mapHeight - player.getEntityCurrentImage().getHeight())	{ 							// Off screen - will not update
+		if(player.getEntityY() < 0 || player.getEntityY() > map.getMapHeight() - player.getEntityCurrentImage().getHeight())	{ 							// Off screen - will not update
 			jumping = false;
 			verticalSpeed = 0.0;
 			player.setEntityY((int)(player.getEntityY() - verticalSpeed));
@@ -218,9 +215,14 @@ public class Main extends BasicGame {
 		if (container.getInput().isKeyDown(Input.KEY_DOWN)) { // Move Down
 			player.setEntityY(player.getEntityY() + (int)(Math.round(.5 + .2 * delta)));
 			
-			if(player.getEntityY() + player.getEntityCurrentImage().getHeight() > mapHeight)	{ // Off screen - will not update
+			if(player.getEntityY() + player.getEntityCurrentImage().getHeight() > map.getMapHeight())	{ // Off screen - will not update
 				player.setEntityY(player.getEntityY() - (int)(Math.round(.5 + .2 * delta)));
 			}
+		}
+		
+		// If player hits 'V', looks to see if item is close by, and picks it up
+		if(container.getInput().isKeyDown(Input.KEY_V))	{
+			playerItemPickUp();
 		}
 		
 	}
@@ -256,10 +258,16 @@ public class Main extends BasicGame {
 	 * Will eventually check through a list of items.
 	 */
 	private void playerItemPickUp () throws SlickException {
-		for(Item item : itemsOnMap)	{
-			if (player.getEntityPoly().intersects(item.getEntityPoly())){
-				Image dummyImage = new Image ("res/TileSheets/bluetoycastle/bluetoycastle_brick1.png");
-				item.setEntityCurrentImage (dummyImage);
+		if(!itemsOnMap.isEmpty())	{
+			Iterator<Item> iter = itemsOnMap.iterator();
+			while(iter.hasNext())	{
+				Item item = iter.next();
+				if (player.getEntityPoly().intersects(item.getEntityPoly())){
+					// Image dummyImage = new Image ("res/TileSheets/bluetoycastle/bluetoycastle_brick1.png");
+					//item.setEntityCurrentImage (dummyImage);
+					player.setMoney(player.getMoney() + item.getItemWorth());
+					iter.remove();
+				}
 			}
 		}
 	}

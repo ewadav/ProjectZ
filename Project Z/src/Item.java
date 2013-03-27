@@ -7,10 +7,8 @@ import org.newdawn.slick.geom.Polygon;
 
 
 public class Item extends Entity{
-	
 	private int itemWorth;
-	private int totalItemsOnMap;
-	//private ArrayList<Item> itemsOnMap;
+
 	
 	
 	public Item (int entityX, int entityY, String state, String entityName, 
@@ -19,10 +17,6 @@ public class Item extends Entity{
 		super(entityX, entityY, state, entityName, entityCurrentImage, poly); // Sets all superclass fields
 		
 		this.itemWorth = itemWorth;
-		
-		//itemsOnMap = new ArrayList<Item>();
-		//itemsOnMap.add(new Item (entityX, entityY, state, entityName, entityCurrentImage, itemWorth, poly));
-		totalItemsOnMap = totalItemsOnMap + 1;
 	}
 	
 	
@@ -32,15 +26,6 @@ public class Item extends Entity{
 	
 	public void setItemWorth(int itemWorth) {
 		this.itemWorth = itemWorth;
-	}
-	
-	
-	public int getTotalItemsOnMap() {
-		return totalItemsOnMap;
-	}
-	
-	public void setTotalItemsOnMap(int totalItemsOnMap) {
-		this.totalItemsOnMap = totalItemsOnMap;
 	}
 	
 }
