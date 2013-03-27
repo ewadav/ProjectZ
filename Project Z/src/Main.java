@@ -27,7 +27,7 @@ public class Main extends BasicGame {
 	
 
 	
-	public Main()  {
+	public Main()  {	
 		super("Project Z");
 	}
 
@@ -178,7 +178,7 @@ public class Main extends BasicGame {
 			
 		}
 		
-		if(playerY < 0 || playerY > mapHeight - player.getEntityCurrentImage().getHeight())	{ 							// Off screen - will not update
+		if(playerY < 0 || playerY > mapHeight - player.getEntityCurrentImage().getHeight())	{ 	// Off screen - will not update
 			jumping = false;
 			verticalSpeed = 0.0;
 			playerY -= verticalSpeed;
@@ -189,7 +189,7 @@ public class Main extends BasicGame {
 		if (container.getInput().isKeyDown(Input.KEY_DOWN)) { // Move Down
 			playerY += Math.round(.5 + .2 * delta);
 			
-			if(playerY + player.getEntityCurrentImage().getHeight() > mapHeight)	{			 // Off screen - will not update
+			if(playerY + player.getEntityCurrentImage().getHeight() > mapHeight)	{	 // Off screen - will not update
 				playerY -= Math.round(.5 + .2 * delta);
 				
 			}
@@ -198,6 +198,7 @@ public class Main extends BasicGame {
 		updatePlayerPosition();
 	}
 	
+	// Checks the game state, if the game is paused, or player wants to exit
 	private void checkGameState(GameContainer container)	{
 		if(container.getInput().isKeyPressed(Input.KEY_ESCAPE))	{
 			if(container.isPaused())	{
