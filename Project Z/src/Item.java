@@ -3,33 +3,28 @@
 // Keeps track of item name, its worth, the image of the item and its current state;
 
 import org.newdawn.slick.Image;
+import org.newdawn.slick.geom.Polygon;
 
-public class Item {
+
+public class Item extends Entity{
 	
-	private String itemName;
 	private int itemWorth;
-	private Image itemImage;
-	private String state;
+	private int totalItemsOnMap;
+	//private ArrayList<Item> itemsOnMap;
 	
 	
-	public Item(String itemName, int itemWorth, Image itemImage)	{
-		this(itemName, itemWorth, itemImage, "NiceItem!");
-	}
-	
-	public Item(String itemName, int itemWorth, Image itemImage, String state)	{
-		this.itemName = itemName;
+	public Item (int entityX, int entityY, String state, String entityName, 
+			Image entityCurrentImage, int itemWorth, Polygon poly) {
+
+		super(entityX, entityY, state, entityName, entityCurrentImage, poly); // Sets all superclass fields
+		
 		this.itemWorth = itemWorth;
-		this.itemImage = itemImage;
-		this.state = state;
+		
+		//itemsOnMap = new ArrayList<Item>();
+		//itemsOnMap.add(new Item (entityX, entityY, state, entityName, entityCurrentImage, itemWorth, poly));
+		totalItemsOnMap = totalItemsOnMap + 1;
 	}
 	
-	public String getItemName() {
-		return itemName;
-	}
-	
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
 	
 	public int getItemWorth() {
 		return itemWorth;
@@ -39,21 +34,13 @@ public class Item {
 		this.itemWorth = itemWorth;
 	}
 	
-	public Image getItemImage() {
-		return itemImage;
+	
+	public int getTotalItemsOnMap() {
+		return totalItemsOnMap;
 	}
 	
-	public void setItemImage(Image itemImage) {
-		this.itemImage = itemImage;
+	public void setTotalItemsOnMap(int totalItemsOnMap) {
+		this.totalItemsOnMap = totalItemsOnMap;
 	}
-	
-	public String getState() {
-		return state;
-	}
-	
-	public void setState(String state) {
-		this.state = state;
-	}
-	
 	
 }

@@ -14,6 +14,7 @@ import org.newdawn.slick.geom.Polygon;
 
 
 public class Main extends BasicGame {
+	
 	private BlockMap map;
 	private Player player;
 	private int playerX;
@@ -23,16 +24,21 @@ public class Main extends BasicGame {
 	private boolean jumping;
 	private Monster monster;
 	private double verticalSpeed;
-	
-	
+	private Item testItem;
 
 	
+	/**********************************************
+	 * Main method for slick, doesn't do all that much. Lists project name.
+	 */
 	public Main()  {
 		super("Project Z");
 	}
 
 	
-	
+	/**********************************************
+	 * Initialization method for Slick. Allocates memory, creates objects.
+	 * Run at the launch of the game and when manually called in the game.
+	 */
 	public void init(GameContainer container) throws SlickException  {
 		container.setVSync(true);
 		map = new BlockMap("res/maps/level.tmx");
@@ -43,59 +49,83 @@ public class Main extends BasicGame {
 		jumping = false;
 		createPlayers();
 		createMonsters();
+		
+		//following code is used for testing the Item class
+		Image testItemImage = new Image ("res/TileSheets/meso/mesocopper_still.png");
+		Polygon testItemPoly = new Polygon(new float[] {
+				400, 400, 
+				400 + testItemImage.getWidth(), 400, 
+				400 + testItemImage.getWidth(), 400 + testItemImage.getHeight(),
+				400, 400+ testItemImage.getHeight()});
+		testItem = new Item (400, 400, "alive", "Copper Meso", testItemImage, 1, testItemPoly);
 	}
 
 	
-	
+	/**********************************************
+	 * Update method for Slick. Runs every frame.
+	 * Listens for keypresses and runs these internal methods.
+	 */
 	public void update (GameContainer container, int delta) throws SlickException  {
 		checkGameState(container);
 		if(!container.isPaused())	{
 			movementHandler(container, delta);
 			monsterChasingAi(delta);	// Monster chasing player
+			playerItemPickUp();
 		}
 	}
 
 	
+	/**********************************************
+	 * Render method for Slick. Runs every frame.
+	 * Displays images, the map, and other information to the game window
+	 */
 	public void render(GameContainer container, Graphics g) throws SlickException {
 			map.getTileMap().render(0, 0);
 			player.getEntityCurrentImage().draw(playerX, playerY);
 			monster.getEntityCurrentImage().draw(monster.getEntityX(), monster.getEntityY());
+			testItem.getEntityCurrentImage().draw(testItem.getEntityX(), testItem.getEntityY());
+			
 			g.drawString(player.getEntityName() , playerX + 30, playerY + 105);
-		
+			g.drawString ("playerX: " + player.getEntityX(), 30, 125);
+			g.drawString ("playerY: " + player.getEntityY(), 30, 145);
+			g.drawString ("PlayerPolyX: " + player.getEntityPoly().getX(), 30, 165);
+			g.drawString ("PlayerPolyY: " + player.getEntityPoly().getY(), 30, 185);
+			
+			g.fillRect (900, 300, 200, 400);
 	}
 
 	
+	/**********************************************
+	 * Main method for the game. Logistical use, executes main slick method.
+	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer container = new AppGameContainer(new Main(), 1280, 720, false);
 		container.start();
 	}
 	
 	
-	
-	////  Helper Methods Below    ////
-	
-	
-	// Updates the player position after a movement
-	private void updatePlayerPosition()	{
-		player.setEntityX(playerX);
-		player.setEntityY(playerY);
-		System.out.println("Player X = " + player.getEntityX() + " Player Y = " + player.getEntityY());
-		System.out.println("Player Poly X = " + player.getEntityPoly().getX() + " Player Poly Y = " + player.getEntityPoly().getY());
-	}
+
+	/*************************Helper Methods Below*************************/
 	
 	
-	// Creates the players on the map
+	
+	/**********************************************
+	 * Creates and populates the player(s) on the map
+	 */
 	private void createPlayers() throws SlickException	{
 		Image playerImage = new Image("res/TileSheets/Tangyoon/tangyoon_open.png");
 		Polygon poly = new Polygon(new float[] {
 				playerX, playerY, 
 				playerX + playerImage.getWidth(), playerY, 
-				playerImage.getWidth(), playerImage.getHeight(),
-				playerX, playerImage.getHeight()});
+				playerX + playerImage.getWidth(), playerY + playerImage.getHeight(),
+				playerX, playerY + playerImage.getHeight()});
 		player = new Player(playerX, playerY, 100, "Alive", "Tangyoon", 1, playerImage,120, poly);
 	}
 	
-	// Creates monsters on the map
+	
+	/**********************************************
+	 * Creates and populates the monster(s) on the map
+	 */
 	private void createMonsters() throws SlickException	{
 		Image monsterImage = new Image("res/TileSheets/jrcactus/jrcactus_still.png");
 		Random generator = new Random();
@@ -110,64 +140,59 @@ public class Main extends BasicGame {
 	}
 	
 	
-	// Makes monsters chase player according to move speed and delta
-	private void monsterChasingAi(int delta)	{
-		// Monster chases in the X direction
-		if(playerX + player.getEntityCurrentImage().getWidth()*4/5 < monster.getEntityX())	{
-			monster.setEntityX((int)Math.round( .5 + monster.getEntityX() - (monster.getMoveSpeed() * delta)));	
-		}else if (playerX - player.getEntityCurrentImage().getWidth()*1/5 > monster.getEntityX())	{
-			monster.setEntityX((int)Math.round(monster.getEntityX() - .5 + (monster.getMoveSpeed() * delta)));	
-		} 
-		
-		// Monster chases in the Y direction
-		if(playerY < monster.getEntityY() + (monster.getEntityCurrentImage().getHeight() - player.getEntityCurrentImage().getHeight()))	{
-			monster.setEntityY((int)Math.round( .5 + monster.getEntityY() - (monster.getMoveSpeed() * delta)));	
-		}else if (playerY > monster.getEntityY() + (monster.getEntityCurrentImage().getHeight() - player.getEntityCurrentImage().getHeight()))	{
-			monster.setEntityY((int)Math.round(monster.getEntityY() - .5 + (monster.getMoveSpeed() * delta)));	
-		} 
-	
+	/**********************************************
+	 * Checks the state of the game. Run at every frame.
+	 * Determines if the game is paused and other various states.
+	 */
+	private void checkGameState(GameContainer container)	{
+		if(container.getInput().isKeyPressed(Input.KEY_GRAVE))	{
+			if(container.isPaused())	{
+				container.resume();
+			}else{
+				container.pause();
+			}
+		}
+		if(container.getInput().isKeyPressed(Input.KEY_ESCAPE))	{
+			container.exit();
+		}
 	}
 	
-	// Handles all the player movement inputs
+	
+	/**********************************************
+	 * Handles all the player movement inputs
+	 */
 	private void movementHandler(GameContainer container, int delta) throws SlickException	{
 		
 		if (container.getInput().isKeyDown(Input.KEY_LEFT)) { // Move Left
 			playerX -= Math.round(.5 + .2 * delta);
 			
-			if(playerX < 0)	{ 							// Off screen - will not update
+			if(playerX < 0)	{ // Off screen - will not update
 				playerX += Math.round(.5 + .2 * delta);
 				
 			}
 			
 			player.setEntityCurrentImage(player.getEntityImageLeft());
-			System.out.println("Flipped Left");
 		}
 		
 		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) { // Move Right
 			playerX += Math.round(.5 + .2 * delta);
 			
-			if(playerX + player.getEntityCurrentImage().getWidth() > mapWidth)	{ 			// Off screen - will not update
+			if(playerX + player.getEntityCurrentImage().getWidth() > mapWidth) { // Off screen - will not update
 				playerX -= Math.round(.5 + .2 * delta);
-				
 			}
 			
 			player.setEntityCurrentImage(player.getEntityImageRight());
-			System.out.println("Flipped Right");
 		}
-		
 		
 		if (container.getInput().isKeyPressed(Input.KEY_SPACE) && !jumping) { // Move Up
 			verticalSpeed = -0.75 * delta; // Initial velocity
 			jumping = true;
 			playerY += verticalSpeed;
-			
-			
 		}
 		
 		if(jumping)	{
-			verticalSpeed +=.035 * delta;  // Gravity factor
+			verticalSpeed +=.035 * delta; // Gravity factor
 			playerY += verticalSpeed;
-			
 			
 			//if(entityCollision())	{
 				//playerY -= verticalSpeed;
@@ -175,42 +200,72 @@ public class Main extends BasicGame {
 				//jumping = false;
 				//player.getEntityPoly().setY(playerY);
 			//}
-			
 		}
 		
 		if(playerY < 0 || playerY > mapHeight - player.getEntityCurrentImage().getHeight())	{ 							// Off screen - will not update
 			jumping = false;
 			verticalSpeed = 0.0;
 			playerY -= verticalSpeed;
-			
-			
 		}
 		
 		if (container.getInput().isKeyDown(Input.KEY_DOWN)) { // Move Down
 			playerY += Math.round(.5 + .2 * delta);
 			
-			if(playerY + player.getEntityCurrentImage().getHeight() > mapHeight)	{			 // Off screen - will not update
+			if(playerY + player.getEntityCurrentImage().getHeight() > mapHeight)	{ // Off screen - will not update
 				playerY -= Math.round(.5 + .2 * delta);
-				
 			}
-			
 		}
+		
 		updatePlayerPosition();
 	}
 	
-	private void checkGameState(GameContainer container)	{
-		if(container.getInput().isKeyPressed(Input.KEY_ESCAPE))	{
-			if(container.isPaused())	{
-				container.resume();
-			}else{
-				container.pause();
-			}
+	
+	/**********************************************
+	 * Helper method for Movement Handler. Updates the player position every frame.
+	 * Called after all valid key presses have been checked.
+	 */
+	private void updatePlayerPosition()	{
+		player.setEntityX(playerX);
+		player.setEntityY(playerY);
+	}
+	
+	
+	/**********************************************
+	 * Makes monsters chase player according to move speed and delta
+	 */
+	private void monsterChasingAi(int delta) {
+		// Monster chases in the X direction
+		if(playerX + player.getEntityCurrentImage().getWidth()*4/5 < monster.getEntityX()) {
+			monster.setEntityX((int)Math.round( .5 + monster.getEntityX() - (monster.getMoveSpeed() * delta)));	
 		}
-		if(container.getInput().isKeyPressed(Input.KEY_GRAVE))	{
-			container.exit();
+		else if (playerX - player.getEntityCurrentImage().getWidth()*1/5 > monster.getEntityX()) {
+			monster.setEntityX((int)Math.round(monster.getEntityX() - .5 + (monster.getMoveSpeed() * delta)));	
+		} 
+		
+		// Monster chases in the Y direction
+		if(playerY < monster.getEntityY() + (monster.getEntityCurrentImage().getHeight() - player.getEntityCurrentImage().getHeight()))	{
+			monster.setEntityY((int)Math.round( .5 + monster.getEntityY() - (monster.getMoveSpeed() * delta)));	
+		}
+		else if (playerY > monster.getEntityY() + (monster.getEntityCurrentImage().getHeight() - player.getEntityCurrentImage().getHeight())) {
+			monster.setEntityY((int)Math.round(monster.getEntityY() - .5 + (monster.getMoveSpeed() * delta)));	
+		} 
+	}
+	
+	
+	/**********************************************
+	 * This method will check to see if the player ever intercepts an item. Runs every frame.
+	 */
+	private void playerItemPickUp () throws SlickException {
+		if (player.polyIntersection(testItem.getEntityPoly())){
+			Image dummyImage = new Image ("res/TileSheets/bluetoycastle/bluetoycastle_brick1.png");
+			testItem.setEntityCurrentImage (dummyImage);
 		}
 	}
 	
+	
+	/**********************************************
+	 * IDK exactly what this is David, main executable collision method?
+	 */
 	@SuppressWarnings("unused")
 	private boolean entityCollision() throws SlickException	{
 		List<Block> colideableBlocks = map.getColideableBlocks(); 

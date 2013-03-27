@@ -5,6 +5,7 @@
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Polygon;
 
+
 public class Monster extends Entity{
 	
 	private int upperDamageBound;
@@ -12,6 +13,7 @@ public class Monster extends Entity{
 	private int armor;
 	private int currentHitPoints;
 	private double moveSpeed;
+	
 	
 	public Monster(int entityX, int entityY, int totalHitPoints, String state,
 			String entityName, int entityLevel, Image entityImage, int upperDamageBound,
@@ -28,7 +30,6 @@ public class Monster extends Entity{
 	}
 	
 	
-	
 	public int getUpperDamageBound() {
 		return upperDamageBound;
 	}
@@ -36,6 +37,7 @@ public class Monster extends Entity{
 	public void setUpperDamageBound(int upperDamageBound) {
 		this.upperDamageBound = upperDamageBound;
 	}
+	
 	
 	public int getMoneyDrop() {
 		return moneyDrop;
@@ -45,6 +47,7 @@ public class Monster extends Entity{
 		this.moneyDrop = moneyDrop;
 	}
 	
+	
 	public int getArmor() {
 		return armor;
 	}
@@ -52,6 +55,7 @@ public class Monster extends Entity{
 	public void setArmor(int armor) {
 		this.armor = armor;
 	}
+	
 	
 	public int getCurrentHitPoints() {
 		return currentHitPoints;
@@ -62,17 +66,12 @@ public class Monster extends Entity{
 	}
 
 
-
 	public double getMoveSpeed() {
 		return moveSpeed;
 	}
 
-
-
 	public void setMoveSpeed(int moveSpeed) {
 		this.moveSpeed = moveSpeed;
 	}
-	
-	
 	
 }
