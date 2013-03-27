@@ -6,7 +6,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Polygon;
 
 
-public class Player extends Entity{
+public class Player extends Entity {
 	
 	private double money;
 	private int totalMana;
@@ -14,7 +14,6 @@ public class Player extends Entity{
 	private int currentHitPoints;
 	private int experienceToLvlUp;
 	private int currentExperience;
-	
 	
 	
 	public Player(int entityX, int entityY, int totalHitPoints, String state,
@@ -27,7 +26,6 @@ public class Player extends Entity{
 		this.currentHitPoints = totalHitPoints;
 		this.experienceToLvlUp = 100;     // Hardcode some shit here   <--------!!!!!
 		this.currentExperience = 0;
-		
 	}
 	
 	
@@ -39,6 +37,7 @@ public class Player extends Entity{
 		this.money = money;
 	}
 	
+	
 	public int getTotalMana() {
 		return totalMana;
 	}
@@ -46,6 +45,7 @@ public class Player extends Entity{
 	public void setTotalMana(int totalMana) {
 		this.totalMana = totalMana;
 	}
+	
 	
 	public int getCurrentMana() {
 		return currentMana;
@@ -55,6 +55,7 @@ public class Player extends Entity{
 		this.currentMana = currentMana;
 	}
 	
+	
 	public int getCurrentHitPoints() {
 		return currentHitPoints;
 	}
@@ -62,6 +63,7 @@ public class Player extends Entity{
 	public void setCurrentHitPoints(int currentHitPoints) {
 		this.currentHitPoints = currentHitPoints;
 	}
+	
 	
 	public int getExperienceToLvlUp() {
 		return experienceToLvlUp;
@@ -71,6 +73,7 @@ public class Player extends Entity{
 		this.experienceToLvlUp = experienceToLvlUp;
 	}
 	
+	
 	public int getCurrentExperience() {
 		return currentExperience;
 	}
@@ -79,7 +82,4 @@ public class Player extends Entity{
 		this.currentExperience = currentExperience;
 	}
 
-
-	
-	
 }

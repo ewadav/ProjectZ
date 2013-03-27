@@ -5,12 +5,15 @@
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Polygon;
 
+
 public class Block {
+	
 	private Polygon blockPoly;
 	private String blockType;
 	private int blockX;
 	private int blockY;
 	private double speedMultiplier;
+	
 	
 	public Block(int x, int y, int test[], String type, double speedMultiplier)	{
 		 blockPoly = new Polygon(new float[]{
@@ -25,13 +28,17 @@ public class Block {
 		
 	}
 	
+	
 	public void update(int delta) {
 	}
 
+	
+	
 	public void draw(Graphics g) {
 	    g.draw(blockPoly);
 	}
 
+	
 	public Polygon getBlockPoly() {
 		return blockPoly;
 	}
@@ -40,6 +47,7 @@ public class Block {
 		this.blockPoly = blockPoly;
 	}
 
+	
 	public String getBlockType() {
 		return blockType;
 	}
@@ -48,6 +56,7 @@ public class Block {
 		this.blockType = blockType;
 	}
 
+	
 	public int getBlockX() {
 		return blockX;
 	}
@@ -56,6 +65,7 @@ public class Block {
 		this.blockX = blockX;
 	}
 
+	
 	public int getBlockY() {
 		return blockY;
 	}
@@ -64,6 +74,7 @@ public class Block {
 		this.blockY = blockY;
 	}
 
+	
 	public double getSpeedMultiplier() {
 		return speedMultiplier;
 	}

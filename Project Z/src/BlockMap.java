@@ -10,11 +10,13 @@ import org.newdawn.slick.tiled.TiledMap;
 
 
 public class BlockMap {
+	
 	private TiledMap tileMap;
 	private int mapWidth;
 	private int mapHeight;
 	private ArrayList<Block> colideableBlocks;
 	private int[] blockSize = {1,1,15,1,15,15,1,15};
+	
 	
 	public BlockMap(String tileMap) throws SlickException	{
 		colideableBlocks = new ArrayList<Block>();
@@ -33,6 +35,7 @@ public class BlockMap {
 	    }
 	}
 
+	
 	public int getMapWidth() {
 		return mapWidth;
 	}
@@ -41,6 +44,7 @@ public class BlockMap {
 		this.mapWidth = mapWidth;
 	}
 
+	
 	public int getMapHeight() {
 		return mapHeight;
 	}
@@ -48,6 +52,7 @@ public class BlockMap {
 	public void setMapHeight(int mapHeight) {
 		this.mapHeight = mapHeight;
 	}
+	
 	
 	public TiledMap getTileMap()	{
 		return this.tileMap;
@@ -57,7 +62,9 @@ public class BlockMap {
 		this.tileMap = tileMap;
 	}
 	
+	
 	public List<Block> getColideableBlocks()	{
 		return colideableBlocks;
 	}
+	
 }

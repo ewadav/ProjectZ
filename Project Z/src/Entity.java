@@ -5,6 +5,7 @@
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Polygon;
 
+
 public class Entity {
 
 	private int entityX;
@@ -19,13 +20,13 @@ public class Entity {
 	private Polygon entityPoly;
 	
 	
-	public Entity(int entityX, int entityY,  int totalHitPoints, String entityName, int entityLevel, Image entityImageLeft, Polygon entityPoly)	{
+	public Entity(int entityX, int entityY,  int totalHitPoints, String entityName, int entityLevel, 
+			Image entityImageLeft, Polygon entityPoly)	{
 		this(entityX, entityY, totalHitPoints, "alive" , entityName, entityLevel, entityImageLeft, entityPoly);
 	}
 	
-	
-	
-	public Entity(int entityX, int entityY, int totalHitPoints, String state, String entityName, int entityLevel, Image entityImageLeft, Polygon entityPoly)	{
+	public Entity(int entityX, int entityY, int totalHitPoints, String state, String entityName, 
+			int entityLevel, Image entityImageLeft, Polygon entityPoly)	{
 		this.entityX = entityX;
 		this.entityY = entityY;
 		this.totalHitPoints = totalHitPoints;
@@ -38,13 +39,36 @@ public class Entity {
 		this.entityPoly = entityPoly;
 	}
 	
+	public Entity(int entityX, int entityY, String state, String entityName, 
+			Image entityCurrentImage, Polygon entityPoly)	{ //constructor for Item class
+		this.entityX = entityX;
+		this.entityY = entityY;
+		this.state = state;
+		this.entityName = entityName;
+		this.entityCurrentImage = entityCurrentImage;
+		this.entityPoly = entityPoly;
+	}
+	
 
-
+	/**********************************************
+	 * This method will check to see if the passing poly 'overlaps' with the object.
+	 */
+	public Boolean polyIntersection(Polygon poly) {
+		if ( !(this.entityPoly.getMinX() >= poly.getMaxX()) &&
+			 !(this.entityPoly.getMaxX() <= poly.getMinX()) &&
+			 !(this.entityPoly.getMinY() <= poly.getMaxY()) &&
+			 !(this.entityPoly.getMaxY() <= poly.getMinY()))
+		{	
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
 	public int getEntityX() {
 		return entityX;
 	}
-
-
 
 	public void setEntityX(int entityX) {
 		this.entityX = entityX;
@@ -52,12 +76,9 @@ public class Entity {
 	}
 
 
-
 	public int getEntityY() {
 		return entityY;
 	}
-
-
 
 	public void setEntityY(int entityY) {
 		this.entityY = entityY;
@@ -65,98 +86,75 @@ public class Entity {
 	}
 
 
-
 	public int getTotalHitPoints() {
 		return totalHitPoints;
 	}
-
-
 
 	public void setTotalHitPoints(int totalHitPoints) {
 		this.totalHitPoints = totalHitPoints;
 	}
 
 
-
 	public String getState() {
 		return state;
 	}
-
-
 
 	public void setState(String state) {
 		this.state = state;
 	}
 
 
-
 	public int getEntityLevel() {
 		return entityLevel;
 	}
-
-
 
 	public void setEntityLevel(int entityLevel) {
 		this.entityLevel = entityLevel;
 	}
 
 
-
 	public String getEntityName() {
 		return entityName;
 	}
-
-
 
 	public void setEntityName(String entityName) {
 		this.entityName = entityName;
 	}
 
 
-
 	public Image getEntityImageLeft() {
 		return entityImageLeft;
 	}
-
-
 
 	public void setEntityImageLeft(Image entityImageLeft) {
 		this.entityImageLeft = entityImageLeft;
 	}
 
 
-
 	public Image getEntityImageRight() {
 		return entityImageRight;
 	}
-
-
 
 	public void setEntityImageRight(Image entityImageRight) {
 		this.entityImageRight = entityImageRight;
 	}
 
 
-
 	public Image getEntityCurrentImage() {
 		return entityCurrentImage;
 	}
-
-
 
 	public void setEntityCurrentImage(Image entityCurrentImage) {
 		this.entityCurrentImage = entityCurrentImage;
 	}
 
 
-
 	public Polygon getEntityPoly() {
 		return entityPoly;
 	}
 
-
-
 	public void setEntityPoly(Polygon entityPoly) {
 		this.entityPoly = entityPoly;
 	}
+	
 }

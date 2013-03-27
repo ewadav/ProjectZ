@@ -5,6 +5,7 @@
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Polygon;
 
+
 public class Projectile {
 	
 	private boolean isVisible;
@@ -13,6 +14,7 @@ public class Projectile {
 	private Image projectileImageRight;
 	private Image projectileImageLeft;
 	private int projectileDamage;
+	
 	
 	public Projectile(boolean isVisible, Polygon projectilePolygon,
 			double moveSpeed, Image projectileImageRight,
@@ -27,7 +29,6 @@ public class Projectile {
 	}
 	
 	
-	
 	public boolean isVisible() {
 		return isVisible;
 	}
@@ -35,6 +36,7 @@ public class Projectile {
 	public void setVisible(boolean isVisible) {
 		this.isVisible = isVisible;
 	}
+	
 	
 	public Polygon getProjectilePolygon() {
 		return projectilePolygon;
@@ -44,6 +46,7 @@ public class Projectile {
 		this.projectilePolygon = projectilePolygon;
 	}
 	
+	
 	public double getMoveSpeed() {
 		return moveSpeed;
 	}
@@ -51,6 +54,7 @@ public class Projectile {
 	public void setMoveSpeed(double moveSpeed) {
 		this.moveSpeed = moveSpeed;
 	}
+	
 	
 	public Image getProjectileImageRight() {
 		return projectileImageRight;
@@ -60,6 +64,7 @@ public class Projectile {
 		this.projectileImageRight = projectileImageRight;
 	}
 	
+	
 	public Image getProjectileImageLeft() {
 		return projectileImageLeft;
 	}
@@ -67,6 +72,7 @@ public class Projectile {
 	public void setProjectileImageLeft(Image projectileImageLeft) {
 		this.projectileImageLeft = projectileImageLeft;
 	}
+	
 	
 	public int getProjectileDamage() {
 		return projectileDamage;
