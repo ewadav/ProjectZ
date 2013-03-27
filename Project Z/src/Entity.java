@@ -50,20 +50,6 @@ public class Entity {
 	}
 	
 
-	/**********************************************
-	 * This method will check to see if the passing poly 'overlaps' with the object.
-	 */
-	public Boolean polyIntersection(Polygon poly) {
-		if ( !(this.entityPoly.getMinX() >= poly.getMaxX()) &&
-			 !(this.entityPoly.getMaxX() <= poly.getMinX()) &&
-			 !(this.entityPoly.getMinY() <= poly.getMaxY()) &&
-			 !(this.entityPoly.getMaxY() <= poly.getMinY()))
-		{	
-			return true;
-		}
-		
-		return false;
-	}
 	
 	
 	public int getEntityX() {
