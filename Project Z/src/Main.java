@@ -1,4 +1,4 @@
-// David Ewald & Brandon Roth 'Project Z' 2013
+//  'Project Z' 2013
 // Main file in charge of game management
 //
 
@@ -24,6 +24,7 @@ public class Main extends BasicGame {
 	private List<Item> itemsOnMap;
 	private final int initialSpawnX;
 	private final int initialSpawnY;
+	private Block currentBlock;
 
 	
 	/**********************************************
@@ -44,7 +45,7 @@ public class Main extends BasicGame {
 	 */
 	public void init(GameContainer container) throws SlickException  {
 		container.setVSync(true);
-		map = new BlockMap("res/maps/level.tmx");
+		map = new BlockMap("res/maps/level.tmx", null, new Portal(200, 500, "res/maps/level2.tmx"));
 		createPlayers();
 		createMonsters();
 		createItems();
@@ -69,7 +70,7 @@ public class Main extends BasicGame {
 	 * Displays images, the map, and other information to the game window
 	 */
 	public void render(GameContainer container, Graphics g) throws SlickException {
-			map.getTileMap().render(0, 0);
+			map.render(container, g);
 			player.getEntityCurrentImage().draw(player.getEntityX(), player.getEntityY());
 			monster.getEntityCurrentImage().draw(monster.getEntityX(), monster.getEntityY());
 			for(Item item : itemsOnMap)	{
@@ -165,80 +166,100 @@ public class Main extends BasicGame {
 	/**********************************************
 	 * Handles all the player movement inputs
 	 */
-	private void movementHandler(GameContainer container, int delta) throws SlickException	{
+	private void movementHandler(GameContainer container, int delta) throws SlickException {
 		int playerX = player.getEntityX();
 		int playerY = player.getEntityY();
 		if (container.getInput().isKeyDown(Input.KEY_LEFT)) { // Move Left
 			int initialX = player.getEntityX();
-			player.setEntityX(player.getEntityX() - (int)Math.round( .5 + .2 * delta));
-			if(player.getEntityX() < 0)	{ // Off screen - will not update
+			player.setEntityX(player.getEntityX()
+					- (int) Math.round(.5 + .2 * delta));
+			if (player.getEntityX() < 0) { // Off screen - will not update
 				player.setEntityX(initialX);
-				
+
 			}
-			
+
 			player.setEntityCurrentImage(player.getEntityImageLeft());
 		}
-		
+
 		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) { // Move Right
 			int initialX = player.getEntityX();
-			player.setEntityX(player.getEntityX() + (int)Math.round( .5 + .2 * delta));
-			if(player.getEntityX() + player.getEntityCurrentImage().getWidth() > map.getMapWidth()) { // Off screen - will not update
+			player.setEntityX(player.getEntityX()
+					+ (int) Math.round(.5 + .2 * delta));
+			if (player.getEntityX() + player.getEntityCurrentImage().getWidth() > map
+					.getMapWidth()) { // Off screen - will not update
 				player.setEntityX(initialX);
 			}
-			
+
 			player.setEntityCurrentImage(player.getEntityImageRight());
 		}
-		
-		if (container.getInput().isKeyPressed(Input.KEY_SPACE) && !jumping) { // Jump up
+
+		if (container.getInput().isKeyPressed(Input.KEY_SPACE) && !jumping) { // Jump
+																				// up
 			verticalSpeed = -0.75 * delta; // Initial velocity
 			jumping = true;
-			player.setEntityY((int)(player.getEntityY() + verticalSpeed));
+			player.setEntityY((int) (player.getEntityY() + verticalSpeed));
 		}
-		
-		if(jumping)	{
-			verticalSpeed +=.035 * delta; // Gravity factor
-			player.setEntityY((int)(player.getEntityY() + verticalSpeed));
-			
-			//if(entityCollision())	{
-				//playerY -= verticalSpeed;
-				//verticalSpeed = 0;
-				//jumping = false;
-				//player.getEntityPoly().setY(playerY);
-			//}
-		}
-		
-		if(player.getEntityY() < 0 || player.getEntityY() > map.getMapHeight() - player.getEntityCurrentImage().getHeight())	{ 	// Off screen - will not update
-			jumping = false;
-			verticalSpeed = 0.0;
-			player.setEntityY((int)(player.getEntityY() - verticalSpeed));
-		}
-		
-		if (container.getInput().isKeyDown(Input.KEY_DOWN)) { // Move Down
-			player.setEntityY(player.getEntityY() + (int)(Math.round(.5 + .2 * delta)));
-			
-			if(player.getEntityY() + player.getEntityCurrentImage().getHeight() > map.getMapHeight())	{ // Off screen - will not update
-				player.setEntityY(player.getEntityY() - (int)(Math.round(.5 + .2 * delta)));
+
+		if (jumping) {
+			verticalSpeed += .035 * delta; // Gravity factor
+
+			player.setEntityY((int) (player.getEntityY() + verticalSpeed));
+			if (entityCollision()) {
+				player.setEntityY(playerY);
+				verticalSpeed = .035 * delta;
 			}
 		}
-		
+
+		if (player.getEntityY() < 0
+				|| player.getEntityY() > map.getMapHeight()
+						- player.getEntityCurrentImage().getHeight()) { // Off
+																		// screen
+																		// -
+																		// will
+																		// not
+																		// update
+			jumping = false;
+			verticalSpeed = 0.0;
+			player.setEntityY((int) (player.getEntityY() - verticalSpeed));
+		}
+
+		if (container.getInput().isKeyDown(Input.KEY_DOWN)) { // Move Down
+			player.setEntityY(player.getEntityY()
+					+ (int) (Math.round(.5 + .2 * delta)));
+
+			if (player.getEntityY()
+					+ player.getEntityCurrentImage().getHeight() > map
+						.getMapHeight()) { // Off screen - will not update
+				player.setEntityY(player.getEntityY()
+						- (int) (Math.round(.5 + .2 * delta)));
+			}
+		}
+
 		// If player hits 'V', looks to see if item is close by, and picks it up
-		if(container.getInput().isKeyDown(Input.KEY_V))	{
+		if (container.getInput().isKeyDown(Input.KEY_V)) {
 			playerItemPickUp();
 		}
 		
-		if(entityCollision())	{
-			player.setEntityY(playerY);
-			player.setEntityX(playerX);
-			verticalSpeed= 0.0;
-			jumping = false;
-			
+		if(container.getInput().isKeyDown(Input.KEY_UP))	{
+			reInitializeMap();
+		}
+
+		if (entityCollision()) {
+			if (verticalSpeed >= 0.0 && playerY >= this.currentBlock.getBlockY()) {
+				player.setEntityY(this.currentBlock.getBlockY());
+				player.setEntityX(playerX);
+				verticalSpeed = 0.0;
+				jumping = false;
+			} else {
+				player.setEntityY(playerY);
+				player.setEntityX(playerX);
+				jumping = false;
+			}
 		}
 	}
+		
 	
-	
-	
-	
-	
+		
 	/**********************************************
 	 * Makes monsters chase player according to move speed and delta
 	 */
@@ -280,6 +301,21 @@ public class Main extends BasicGame {
 		}
 	}
 	
+	private void reInitializeMap() throws SlickException	{
+		if(map.getEntryPortal() != null)	{
+			if(player.getEntityPoly().intersects(map.getEntryPortal().getPortalPoly()))	{
+				map = new BlockMap(map.getEntryPortal().getPortalMap(), new Portal(50, 290, map.getEntryPortal().getPortalMap()), new Portal(200, 500, map.getEntryPortal().getPortalMap()));
+			}
+		}
+		if(map.getExitPortal() != null) 	{
+			if(player.getEntityPoly().intersects(map.getExitPortal().getPortalPoly()))	{
+			map = new BlockMap(map.getExitPortal().getPortalMap(), new Portal(50, 290, "res/maps/level.tmx"), null);
+
+			}
+		}
+	}
+	
+	
 	
 	/**********************************************
 	 * IDK exactly what this is David, main executable collision method?
@@ -289,6 +325,7 @@ public class Main extends BasicGame {
 		for (int i = 0; i < colideableBlocks.size(); i++) {
 	            Block currentBlock = colideableBlocks.get(i);
 	            if (player.getEntityPoly().intersects(currentBlock.getBlockPoly())) {
+	            	this.currentBlock = currentBlock;
 	            	return true;
 	            }
 		}
