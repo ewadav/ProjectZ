@@ -33,8 +33,8 @@ public class Main extends BasicGame {
 		super("Project Z");
 		jumping = false;
 		itemsOnMap = new ArrayList<Item>();
-		initialSpawnX = 150;
-		initialSpawnY = 150;
+		initialSpawnX = 250;
+		initialSpawnY = 250;
 	}
 
 	
@@ -166,7 +166,8 @@ public class Main extends BasicGame {
 	 * Handles all the player movement inputs
 	 */
 	private void movementHandler(GameContainer container, int delta) throws SlickException	{
-		
+		int playerX = player.getEntityX();
+		int playerY = player.getEntityY();
 		if (container.getInput().isKeyDown(Input.KEY_LEFT)) { // Move Left
 			int initialX = player.getEntityX();
 			player.setEntityX(player.getEntityX() - (int)Math.round( .5 + .2 * delta));
@@ -225,6 +226,13 @@ public class Main extends BasicGame {
 			playerItemPickUp();
 		}
 		
+		if(entityCollision())	{
+			player.setEntityY(playerY);
+			player.setEntityX(playerX);
+			verticalSpeed= 0.0;
+			jumping = false;
+			
+		}
 	}
 	
 	
@@ -276,7 +284,6 @@ public class Main extends BasicGame {
 	/**********************************************
 	 * IDK exactly what this is David, main executable collision method?
 	 */
-	@SuppressWarnings("unused")
 	private boolean entityCollision() throws SlickException	{
 		List<Block> colideableBlocks = map.getColideableBlocks(); 
 		for (int i = 0; i < colideableBlocks.size(); i++) {
