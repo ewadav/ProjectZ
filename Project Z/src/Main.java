@@ -27,7 +27,7 @@ public class Main extends BasicGame {
 
 	
 	/**********************************************
-	 * Main method for slick, doesn't do all that much. Lists project name.
+	 * Main method for slick, doesn't do all that much. Lists project name, initializes fields.
 	 */
 	public Main()  {
 		super("Project Z");
@@ -188,7 +188,7 @@ public class Main extends BasicGame {
 			player.setEntityCurrentImage(player.getEntityImageRight());
 		}
 		
-		if (container.getInput().isKeyPressed(Input.KEY_SPACE) && !jumping) { // Move Up
+		if (container.getInput().isKeyPressed(Input.KEY_SPACE) && !jumping) { // Jump up
 			verticalSpeed = -0.75 * delta; // Initial velocity
 			jumping = true;
 			player.setEntityY((int)(player.getEntityY() + verticalSpeed));
@@ -206,7 +206,7 @@ public class Main extends BasicGame {
 			//}
 		}
 		
-		if(player.getEntityY() < 0 || player.getEntityY() > map.getMapHeight() - player.getEntityCurrentImage().getHeight())	{ 							// Off screen - will not update
+		if(player.getEntityY() < 0 || player.getEntityY() > map.getMapHeight() - player.getEntityCurrentImage().getHeight())	{ 	// Off screen - will not update
 			jumping = false;
 			verticalSpeed = 0.0;
 			player.setEntityY((int)(player.getEntityY() - verticalSpeed));
@@ -254,8 +254,8 @@ public class Main extends BasicGame {
 	
 	
 	/**********************************************
-	 * This method will check to see if the player ever intercepts an item. Runs every frame.
-	 * Will eventually check through a list of items.
+	 * This method will check to see if the player ever intercepts an item. Runs only if 'V' is pressed
+	 * 	 * Will eventually check through a list of items.
 	 */
 	private void playerItemPickUp () throws SlickException {
 		if(!itemsOnMap.isEmpty())	{
@@ -264,7 +264,7 @@ public class Main extends BasicGame {
 				Item item = iter.next();
 				if (player.getEntityPoly().intersects(item.getEntityPoly())){
 					// Image dummyImage = new Image ("res/TileSheets/bluetoycastle/bluetoycastle_brick1.png");
-					//item.setEntityCurrentImage (dummyImage);
+					// item.setEntityCurrentImage (dummyImage);
 					player.setMoney(player.getMoney() + item.getItemWorth());
 					iter.remove();
 				}
