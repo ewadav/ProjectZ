@@ -3,7 +3,6 @@
 //
 
 import java.util.*;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -25,7 +24,7 @@ public class Main extends BasicGame {
 	private final int initialSpawnX;
 	private final int initialSpawnY;
 	private Block currentBlock;
-
+	
 	
 	/**********************************************
 	 * Main method for slick, doesn't do all that much. Lists project name, initializes fields.
@@ -37,7 +36,7 @@ public class Main extends BasicGame {
 		initialSpawnX = 250;
 		initialSpawnY = 250;
 	}
-
+	
 	
 	/**********************************************
 	 * Initialization method for Slick. Allocates memory, creates objects.
@@ -50,7 +49,7 @@ public class Main extends BasicGame {
 		createMonsters();
 		createItems();
 	}
-
+	
 	
 	/**********************************************
 	 * Update method for Slick. Runs every frame.
@@ -63,7 +62,7 @@ public class Main extends BasicGame {
 			monsterChasingAi(delta);	// Monster chasing player
 		}
 	}
-
+	
 	
 	/**********************************************
 	 * Render method for Slick. Runs every frame.
@@ -71,7 +70,18 @@ public class Main extends BasicGame {
 	 */
 	public void render(GameContainer container, Graphics g) throws SlickException {
 			map.render(container, g);
-			player.getEntityCurrentImage().draw(player.getEntityX(), player.getEntityY());
+			//player.getEntityCurrentImage().draw(player.getEntityX(), player.getEntityY());
+			
+			if (player.getLastInput() == null) { //before any input, just draw the ani
+				player.getEntityAniLeft().draw(player.getEntityX(), player.getEntityY());
+			}
+			if (player.getLastInput() == "left") { //if last input was left, draw left ani
+				player.getEntityAniLeft().draw(player.getEntityX(), player.getEntityY());
+			}
+			if (player.getLastInput() == "right") { //if last input was right, draw right ani
+				player.getEntityAniRight().draw(player.getEntityX(), player.getEntityY());
+			}
+
 			monster.getEntityCurrentImage().draw(monster.getEntityX(), monster.getEntityY());
 			for(Item item : itemsOnMap)	{
 				item.getEntityCurrentImage().draw(item.getEntityX(), item.getEntityY());
@@ -84,7 +94,7 @@ public class Main extends BasicGame {
 			g.drawString ("PlayerPolyY: " + player.getEntityPoly().getY(), 30, 185);
 			g.drawString ("PlayerMoney: " + player.getMoney(), 30, 205);
 	}
-
+	
 	
 	/**********************************************
 	 * Main method for the game. Logistical use, executes main slick method.
@@ -95,7 +105,7 @@ public class Main extends BasicGame {
 	}
 	
 	
-
+	
 	/*************************Helper Methods Below*************************/
 	
 	
@@ -105,12 +115,16 @@ public class Main extends BasicGame {
 	 */
 	private void createPlayers() throws SlickException	{
 		Image playerImage = new Image("res/TileSheets/Tangyoon/tangyoon_open.png");
+		
 		Polygon poly = new Polygon(new float[] {
 				initialSpawnX, initialSpawnY, 
-				initialSpawnX + playerImage.getWidth(), initialSpawnY, 
-				initialSpawnX + playerImage.getWidth(), initialSpawnY + playerImage.getHeight(),
-				initialSpawnX, initialSpawnY + playerImage.getHeight()});
-		player = new Player(initialSpawnX, initialSpawnY, 100, "Alive", "Tangyoon", 1, playerImage,120, poly);
+				initialSpawnX + 73, initialSpawnY, 
+				initialSpawnX + 73, initialSpawnY + 89,
+				initialSpawnX, initialSpawnY + 89});
+		
+		player = new Player(initialSpawnX, initialSpawnY, 100, "Alive", "Tangyoon", 1, playerImage, 120, poly);
+		
+		player.setEntityAni("res/TileSheets/robotBoy/masterrobo_moving.png");
 	}
 	
 	
@@ -119,27 +133,33 @@ public class Main extends BasicGame {
 	 */
 	private void createMonsters() throws SlickException	{
 		Image monsterImage = new Image("res/TileSheets/jrcactus/jrcactus_still.png");
+		
 		Random generator = new Random();
 		int monsterX = generator.nextInt(map.getMapWidth());
 		int monsterY = generator.nextInt(map.getMapHeight());
+		
 		Polygon poly = new Polygon(new float[] {
 				monsterX, monsterY, 
 				monsterX + monsterImage.getWidth(),monsterY, 
 				monsterImage.getWidth(), monsterImage.getHeight(),
 				monsterX, monsterImage.getHeight()});
+		
 		monster = new Monster(monsterX, monsterY, 250, "Alive", "JrCactus", 3, monsterImage, 30, 7, .11, poly);
 	}
+	
 	
 	/**********************************************
 	 * Creates and populates the item(s) on the map
 	 */
 	private void createItems() throws SlickException	{
 		Image testItemImage = new Image ("res/TileSheets/meso/mesocopper_still.png");
+		
 		Polygon testItemPoly = new Polygon(new float[] {
 				400, 400, 
 				400 + testItemImage.getWidth(), 400, 
 				400 + testItemImage.getWidth(), 400 + testItemImage.getHeight(),
 				400, 400 + testItemImage.getHeight()});
+		
 		Item testItem = new Item (400, 400, "alive", "Copper Meso", testItemImage, 14, testItemPoly);
 		itemsOnMap.add(testItem);
 	}
@@ -164,37 +184,31 @@ public class Main extends BasicGame {
 	
 	
 	/**********************************************
-	 * Handles all the player movement inputs
+	 * Handles all the player inputs
 	 */
 	private void movementHandler(GameContainer container, int delta) throws SlickException {
 		int playerX = player.getEntityX();
 		int playerY = player.getEntityY();
+		
 		if (container.getInput().isKeyDown(Input.KEY_LEFT)) { // Move Left
-			int initialX = player.getEntityX();
-			player.setEntityX(player.getEntityX()
-					- (int) Math.round(.5 + .2 * delta));
-			if (player.getEntityX() < 0) { // Off screen - will not update
-				player.setEntityX(initialX);
-
-			}
-
-			player.setEntityCurrentImage(player.getEntityImageLeft());
+			player.setEntityX(player.getEntityX() - (int) Math.round(.5 + .2 * delta));
+			//player.setEntityCurrentImage(player.getEntityImageLeft());
+			player.getEntityAniLeft().update(delta);
+			player.getEntityAniLeft().draw(player.getEntityX(), player.getEntityY());
+			
+			player.setLastInput ("left");
 		}
 
 		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) { // Move Right
-			int initialX = player.getEntityX();
-			player.setEntityX(player.getEntityX()
-					+ (int) Math.round(.5 + .2 * delta));
-			if (player.getEntityX() + player.getEntityCurrentImage().getWidth() > map
-					.getMapWidth()) { // Off screen - will not update
-				player.setEntityX(initialX);
-			}
-
+			player.setEntityX(player.getEntityX() + (int) Math.round(.5 + .2 * delta));
 			player.setEntityCurrentImage(player.getEntityImageRight());
+			player.getEntityAniRight().update(delta);
+			player.getEntityAniRight().draw(player.getEntityX(), player.getEntityY());
+			
+			player.setLastInput ("right");
 		}
 
-		if (container.getInput().isKeyPressed(Input.KEY_SPACE) && !jumping) { // Jump
-																				// up
+		if (container.getInput().isKeyPressed(Input.KEY_SPACE) && !jumping) { // JumpUp
 			verticalSpeed = -0.75 * delta; // Initial velocity
 			jumping = true;
 			player.setEntityY((int) (player.getEntityY() + verticalSpeed));
@@ -210,31 +224,10 @@ public class Main extends BasicGame {
 			}
 		}
 
-		if (player.getEntityY() < 0
-				|| player.getEntityY() > map.getMapHeight()
-						- player.getEntityCurrentImage().getHeight()) { // Off
-																		// screen
-																		// -
-																		// will
-																		// not
-																		// update
-			jumping = false;
-			verticalSpeed = 0.0;
-			player.setEntityY((int) (player.getEntityY() - verticalSpeed));
-		}
-
 		if (container.getInput().isKeyDown(Input.KEY_DOWN)) { // Move Down
-			player.setEntityY(player.getEntityY()
-					+ (int) (Math.round(.5 + .2 * delta)));
-
-			if (player.getEntityY()
-					+ player.getEntityCurrentImage().getHeight() > map
-						.getMapHeight()) { // Off screen - will not update
-				player.setEntityY(player.getEntityY()
-						- (int) (Math.round(.5 + .2 * delta)));
-			}
+			player.setEntityY(player.getEntityY() + (int) (Math.round(.5 + .2 * delta)));
 		}
-
+		
 		// If player hits 'V', looks to see if item is close by, and picks it up
 		if (container.getInput().isKeyDown(Input.KEY_V)) {
 			playerItemPickUp();
@@ -243,7 +236,7 @@ public class Main extends BasicGame {
 		if(container.getInput().isKeyDown(Input.KEY_UP))	{
 			reInitializeMap();
 		}
-
+		
 		if (entityCollision()) {
 			if (verticalSpeed >= 0.0 && playerY >= this.currentBlock.getBlockY()) {
 				player.setEntityY(this.currentBlock.getBlockY());
@@ -257,9 +250,8 @@ public class Main extends BasicGame {
 			}
 		}
 	}
-		
 	
-		
+	
 	/**********************************************
 	 * Makes monsters chase player according to move speed and delta
 	 */
@@ -301,6 +293,10 @@ public class Main extends BasicGame {
 		}
 	}
 	
+	
+	/**********************************************
+	 * Stub, someone comment what this does
+	 */
 	private void reInitializeMap() throws SlickException	{
 		if(map.getEntryPortal() != null)	{
 			if(player.getEntityPoly().intersects(map.getEntryPortal().getPortalPoly()))	{
@@ -314,7 +310,6 @@ public class Main extends BasicGame {
 			}
 		}
 	}
-	
 	
 	
 	/**********************************************
@@ -331,5 +326,4 @@ public class Main extends BasicGame {
 		}
 		return false;
 	}
-	
 }

@@ -4,20 +4,21 @@
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Polygon;
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 
 public class Entity {
 
-	private int entityX;
-	private int entityY;
+	private int entityX; private int entityY;
 	private int totalHitPoints;
 	private String state;
 	private String entityName;
 	private int entityLevel;
-	private Image entityImageLeft;
-	private Image entityImageRight;
-	private Image entityCurrentImage;
+	private Image entityImageLeft; private Image entityImageRight; private Image entityCurrentImage;
 	private Polygon entityPoly;
+	private Animation entityAniLeft; private Animation entityAniRight;
 	
 	
 	public Entity(int entityX, int entityY,  int totalHitPoints, String entityName, int entityLevel, 
@@ -47,9 +48,32 @@ public class Entity {
 		this.entityName = entityName;
 		this.entityCurrentImage = entityCurrentImage;
 		this.entityPoly = entityPoly;
+	}	
+
+	
+	public void setEntityAni (String spriteSheet) throws SlickException {
+		SpriteSheet entitySSLeft = new SpriteSheet (spriteSheet, 77, 89, 20);
+		entityAniLeft = new Animation(false);//false arg so that the ani doesnt run when still
+		for (int i = 0; i < 8; i++) {
+			entityAniLeft.addFrame(entitySSLeft.getSprite(i,0), 30);
+		}
+		
+		Image tempImage = new Image (spriteSheet); //next three statements are for a flipped spritesheet
+		Image tempFlipped = tempImage.getFlippedCopy(true, false);
+		SpriteSheet entitySSRight = new SpriteSheet (tempFlipped, 77, 89, 20);
+		entityAniRight = new Animation(false);
+		for (int i = 0; i < 8; i++) {
+			entityAniRight.addFrame(entitySSRight.getSprite(i,0), 30);
+		}
 	}
 	
-
+	public Animation getEntityAniLeft() {
+		return entityAniLeft;
+	}
+	
+	public Animation getEntityAniRight() {
+		return entityAniRight;
+	}
 	
 	
 	public int getEntityX() {

@@ -14,6 +14,7 @@ public class Player extends Entity {
 	private int currentHitPoints;
 	private int experienceToLvlUp;
 	private int currentExperience;
+	private String lastInput;
 	
 	
 	public Player(int entityX, int entityY, int totalHitPoints, String state,
@@ -82,4 +83,13 @@ public class Player extends Entity {
 		this.currentExperience = currentExperience;
 	}
 
+	
+	public String getLastInput() {
+		return lastInput;
+	}
+	
+	public void setLastInput (String input) {
+		this.lastInput = input;
+	}
+	
 }
