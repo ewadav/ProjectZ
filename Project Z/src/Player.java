@@ -2,6 +2,7 @@
 //
 //
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -33,6 +34,7 @@ public class Player extends Entity {
 	
 	
 	public void render(GameContainer gc, Graphics g)	{	
+		g.setColor(Color.white);
 		if (lastInput == null) { //before any input, just draw the ani
 			super.getEntityAniLeft().draw(super.getEntityX(), super.getEntityY());
 		}

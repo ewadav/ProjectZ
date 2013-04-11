@@ -16,7 +16,7 @@ public class BlockMap {
 	private TiledMap tileMap;
 	private int mapWidth;
 	private int mapHeight;
-	private ArrayList<Block> colideableBlocks;
+	private List<Block> colideableBlocks;
 	private int[] blockSize = {1,1,15,1,15,15,1,15};
 	private Portal entryPortal;
 	private Portal exitPortal;

@@ -5,6 +5,7 @@
 import java.util.*;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -16,6 +17,7 @@ import org.newdawn.slick.geom.Polygon;
 public class Main extends BasicGame {
 	
 	private BlockMap map;
+	private MiniMap miniMap;
 	private Player player;
 	private boolean jumping;
 	private Monster monster;
@@ -45,6 +47,7 @@ public class Main extends BasicGame {
 	public void init(GameContainer container) throws SlickException  {
 		container.setVSync(true);
 		map = new BlockMap("Project Z/res/maps/level.tmx", null, new Portal(200, 500, "Project Z/res/maps/level2.tmx"));
+		miniMap = new MiniMap(map.getMapHeight(), map.getMapWidth(), map.getTileMap());
 		createPlayers();
 		createMonsters();
 		createItems();
@@ -70,6 +73,7 @@ public class Main extends BasicGame {
 	 */
 	public void render(GameContainer container, Graphics g) throws SlickException {
 			map.render(container, g); // renders map
+			miniMap.render(container, g, player);
 			
 			player.render(container, g); // renders player
 
@@ -206,7 +210,7 @@ public class Main extends BasicGame {
 			player.setEntityY((int) (player.getEntityY() + verticalSpeed));
 			if (entityCollision()) {
 				player.setEntityY(playerY);
-				verticalSpeed = .035 * delta;
+				verticalSpeed += .035 * delta;
 			}
 		}
 
@@ -224,16 +228,9 @@ public class Main extends BasicGame {
 		}
 		
 		if (entityCollision()) {
-			if (verticalSpeed >= 0.0 && playerY >= this.currentBlock.getBlockY()) {
-				player.setEntityY(this.currentBlock.getBlockY());
-				player.setEntityX(playerX);
-				verticalSpeed = 0.0;
-				jumping = false;
-			} else {
-				player.setEntityY(playerY);
-				player.setEntityX(playerX);
-				jumping = false;
-			}
+			player.setEntityY(playerY);
+			player.setEntityX(playerX);
+			jumping = false;
 		}
 	}
 	
@@ -297,7 +294,7 @@ public class Main extends BasicGame {
 	
 	
 	/**********************************************
-	 * IDK exactly what this is David, main executable collision method?
+	 * Determines if player is colliding with a collision block on the map
 	 */
 	private boolean entityCollision() throws SlickException	{
 		List<Block> colideableBlocks = map.getColideableBlocks(); 
@@ -311,7 +308,11 @@ public class Main extends BasicGame {
 		return false;
 	}
 	
+	/**********************************************
+	 * draws all the game stats, such as player position and so on
+	 */
 	private void drawGameStats(GameContainer container, Graphics g) throws SlickException	{
+		g.setColor(Color.white);
 		g.drawString ("playerX: " + player.getEntityX(), 30, 125);
 		g.drawString ("playerY: " + player.getEntityY(), 30, 145);
 		g.drawString ("PlayerPolyX: " + player.getEntityPoly().getX(), 30, 165);
