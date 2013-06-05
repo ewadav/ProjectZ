@@ -21,8 +21,8 @@ public class Main extends BasicGame {
 	private Monster monster;
 	private double verticalSpeed;
 	private List<Item> itemsOnMap;
-	private final int initialSpawnX;
-	private final int initialSpawnY;
+	private int initialSpawnX;
+	private int initialSpawnY;
 	private Block currentBlock;
 	
 	
@@ -33,8 +33,8 @@ public class Main extends BasicGame {
 		super("Project Z");
 		jumping = false;
 		itemsOnMap = new ArrayList<Item>();
-		initialSpawnX = 250;
-		initialSpawnY = 250;
+		initialSpawnX = 100;
+		initialSpawnY = 100;
 	}
 	
 	
@@ -238,7 +238,7 @@ public class Main extends BasicGame {
 		}
 		
 		if (entityCollision()) {
-			if (verticalSpeed >= 0.0 && playerY >= this.currentBlock.getBlockY()) {
+			if (verticalSpeed >= 0.0) {
 				player.setEntityY(this.currentBlock.getBlockY());
 				player.setEntityX(playerX);
 				verticalSpeed = 0.0;
