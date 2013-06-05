@@ -26,6 +26,7 @@ public class Entity {
 		this(entityX, entityY, totalHitPoints, "alive" , entityName, entityLevel, entityImageLeft, entityPoly);
 	}
 	
+	
 	public Entity(int entityX, int entityY, int totalHitPoints, String state, String entityName, 
 			int entityLevel, Image entityImageLeft, Polygon entityPoly)	{
 		this.entityX = entityX;

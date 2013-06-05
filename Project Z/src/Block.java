@@ -29,11 +29,6 @@ public class Block {
 	}
 	
 	
-	public void update(int delta) {
-	}
-
-	
-	
 	public void draw(Graphics g) {
 	    g.draw(blockPoly);
 	}

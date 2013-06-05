@@ -1,4 +1,4 @@
-// David Ewald & Brandon Roth 'Project Z' 2013
+ // David Ewald & Brandon Roth 'Project Z' 2013
 // This class holds the TiledMap as well as the Width and Height
 // Also Holds the size of the blocks, as well as the blocks which are colideable
 
@@ -16,7 +16,7 @@ public class BlockMap {
 	private TiledMap tileMap;
 	private int mapWidth;
 	private int mapHeight;
-	private ArrayList<Block> colideableBlocks;
+	private List<Block> colideableBlocks;
 	private int[] blockSize = {1,1,15,1,15,15,1,15};
 	private Portal entryPortal;
 	private Portal exitPortal;

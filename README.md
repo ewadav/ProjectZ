@@ -1,6 +1,12 @@
 ProjectZ
 ========
 
+Things to work on
+- Collision
+- Maps (folders and parser)
+- Inventory
+- Projectiles
+
 
 Project Goals
 - Stat customization

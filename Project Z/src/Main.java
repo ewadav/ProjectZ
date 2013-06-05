@@ -5,6 +5,7 @@
 import java.util.*;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -44,7 +45,7 @@ public class Main extends BasicGame {
 	 */
 	public void init(GameContainer container) throws SlickException  {
 		container.setVSync(true);
-		map = new BlockMap("res/maps/level.tmx", null, new Portal(200, 500, "res/maps/level2.tmx"));
+		map = new BlockMap("Project Z/res/maps/level.tmx", null, new Portal(200, 500, "Project Z/res/maps/level2.tmx"));
 		createPlayers();
 		createMonsters();
 		createItems();
@@ -69,30 +70,17 @@ public class Main extends BasicGame {
 	 * Displays images, the map, and other information to the game window
 	 */
 	public void render(GameContainer container, Graphics g) throws SlickException {
-			map.render(container, g);
-			//player.getEntityCurrentImage().draw(player.getEntityX(), player.getEntityY());
+			map.render(container, g); // renders map
 			
-			if (player.getLastInput() == null) { //before any input, just draw the ani
-				player.getEntityAniLeft().draw(player.getEntityX(), player.getEntityY());
-			}
-			if (player.getLastInput() == "left") { //if last input was left, draw left ani
-				player.getEntityAniLeft().draw(player.getEntityX(), player.getEntityY());
-			}
-			if (player.getLastInput() == "right") { //if last input was right, draw right ani
-				player.getEntityAniRight().draw(player.getEntityX(), player.getEntityY());
-			}
+			player.render(container, g); // renders player
 
-			monster.getEntityCurrentImage().draw(monster.getEntityX(), monster.getEntityY());
-			for(Item item : itemsOnMap)	{
+			monster.getEntityCurrentImage().draw(monster.getEntityX(), monster.getEntityY()); // renders monster
+			
+			for(Item item : itemsOnMap)	{ // renders all items on map
 				item.getEntityCurrentImage().draw(item.getEntityX(), item.getEntityY());
 			}
 			
-			g.drawString(player.getEntityName() , player.getEntityX() + 30, player.getEntityY() + 105);
-			g.drawString ("playerX: " + player.getEntityX(), 30, 125);
-			g.drawString ("playerY: " + player.getEntityY(), 30, 145);
-			g.drawString ("PlayerPolyX: " + player.getEntityPoly().getX(), 30, 165);
-			g.drawString ("PlayerPolyY: " + player.getEntityPoly().getY(), 30, 185);
-			g.drawString ("PlayerMoney: " + player.getMoney(), 30, 205);
+			drawGameStats(container, g); // renders stats of game
 	}
 	
 	
@@ -114,17 +102,16 @@ public class Main extends BasicGame {
 	 * Creates and populates the player(s) on the map
 	 */
 	private void createPlayers() throws SlickException	{
-		Image playerImage = new Image("res/TileSheets/Tangyoon/tangyoon_open.png");
-		
+		Image playerImage = new Image("Project Z/res/TileSheets/Tangyoon/tangyoon_open.png");
 		Polygon poly = new Polygon(new float[] {
 				initialSpawnX, initialSpawnY, 
 				initialSpawnX + 73, initialSpawnY, 
 				initialSpawnX + 73, initialSpawnY + 89,
 				initialSpawnX, initialSpawnY + 89});
 		
-		player = new Player(initialSpawnX, initialSpawnY, 100, "Alive", "Tangyoon", 1, playerImage, 120, poly);
+		player = new Player(initialSpawnX, initialSpawnY, 100, "Alive", "Robot", 1, 120, playerImage, poly);
 		
-		player.setEntityAni("res/TileSheets/robotBoy/masterrobo_moving.png");
+		player.setEntityAni("Project Z/res/TileSheets/robotBoy/masterrobo_moving.png");
 	}
 	
 	
@@ -132,7 +119,7 @@ public class Main extends BasicGame {
 	 * Creates and populates the monster(s) on the map
 	 */
 	private void createMonsters() throws SlickException	{
-		Image monsterImage = new Image("res/TileSheets/jrcactus/jrcactus_still.png");
+		Image monsterImage = new Image("Project Z/res/TileSheets/jrcactus/jrcactus_still.png");
 		
 		Random generator = new Random();
 		int monsterX = generator.nextInt(map.getMapWidth());
@@ -152,7 +139,7 @@ public class Main extends BasicGame {
 	 * Creates and populates the item(s) on the map
 	 */
 	private void createItems() throws SlickException	{
-		Image testItemImage = new Image ("res/TileSheets/meso/mesocopper_still.png");
+		Image testItemImage = new Image ("Project Z/res/TileSheets/meso/mesocopper_still.png");
 		
 		Polygon testItemPoly = new Polygon(new float[] {
 				400, 400, 
@@ -220,7 +207,7 @@ public class Main extends BasicGame {
 			player.setEntityY((int) (player.getEntityY() + verticalSpeed));
 			if (entityCollision()) {
 				player.setEntityY(playerY);
-				verticalSpeed = .035 * delta;
+				verticalSpeed += .035 * delta;
 			}
 		}
 
@@ -238,6 +225,7 @@ public class Main extends BasicGame {
 		}
 		
 		if (entityCollision()) {
+
 			if (verticalSpeed >= 0.0) {
 				player.setEntityY(this.currentBlock.getBlockY());
 				player.setEntityX(playerX);
@@ -248,6 +236,11 @@ public class Main extends BasicGame {
 				player.setEntityX(playerX);
 				jumping = false;
 			}
+
+			player.setEntityY(playerY);
+			player.setEntityX(playerX);
+			jumping = false;
+
 		}
 	}
 	
@@ -284,8 +277,6 @@ public class Main extends BasicGame {
 			while(iter.hasNext())	{
 				Item item = iter.next();
 				if (player.getEntityPoly().intersects(item.getEntityPoly())){
-					// Image dummyImage = new Image ("res/TileSheets/bluetoycastle/bluetoycastle_brick1.png");
-					// item.setEntityCurrentImage (dummyImage);
 					player.setMoney(player.getMoney() + item.getItemWorth());
 					iter.remove();
 				}
@@ -305,7 +296,7 @@ public class Main extends BasicGame {
 		}
 		if(map.getExitPortal() != null) 	{
 			if(player.getEntityPoly().intersects(map.getExitPortal().getPortalPoly()))	{
-			map = new BlockMap(map.getExitPortal().getPortalMap(), new Portal(50, 290, "res/maps/level.tmx"), null);
+			map = new BlockMap(map.getExitPortal().getPortalMap(), new Portal(50, 290, "Project Z/res/maps/level.tmx"), null);
 
 			}
 		}
@@ -313,7 +304,7 @@ public class Main extends BasicGame {
 	
 	
 	/**********************************************
-	 * IDK exactly what this is David, main executable collision method?
+	 * Determines if player is colliding with a collision block on the map
 	 */
 	private boolean entityCollision() throws SlickException	{
 		List<Block> colideableBlocks = map.getColideableBlocks(); 
@@ -325,5 +316,17 @@ public class Main extends BasicGame {
 	            }
 		}
 		return false;
+	}
+	
+	/**********************************************
+	 * draws all the game stats, such as player position and so on
+	 */
+	private void drawGameStats(GameContainer container, Graphics g) throws SlickException	{
+		g.setColor(Color.white);
+		g.drawString ("playerX: " + player.getEntityX(), 30, 125);
+		g.drawString ("playerY: " + player.getEntityY(), 30, 145);
+		g.drawString ("PlayerPolyX: " + player.getEntityPoly().getX(), 30, 165);
+		g.drawString ("PlayerPolyY: " + player.getEntityPoly().getY(), 30, 185);
+		g.drawString ("PlayerMoney: " + player.getMoney(), 30, 205);
 	}
 }

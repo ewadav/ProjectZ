@@ -18,7 +18,7 @@ public class Portal {
 		this.portalX = portalX;
 		this.portalY = portalY;
 		portalMap = map;
-		portalImage = new Image("res/TileSheets/portal/portal.png");
+		portalImage = new Image("Project Z/res/TileSheets/portal/portal.png");
 		portalPoly = new Polygon(new float[] {
 				portalX, portalY, 
 				portalX + portalImage.getWidth(), portalY, 
