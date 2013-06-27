@@ -1,4 +1,4 @@
-//  'Project Z' 2013
+// David Ewald & Brandon Roth Project Z' 2013
 // Main file in charge of game management
 //
 
@@ -171,7 +171,7 @@ public class Main extends BasicGame {
 	
 	
 	/**********************************************
-	 * Handles all the player inputs
+	 * Handles all the player inputs, (this needs to be replaced by an object, and much more physics)
 	 */
 	private void movementHandler(GameContainer container, int delta) throws SlickException {
 		int playerX = player.getEntityX();
@@ -286,7 +286,7 @@ public class Main extends BasicGame {
 	
 	
 	/**********************************************
-	 * Stub, someone comment what this does
+	 * This has to do with loading in a new map, when entering a portal, will be changed later
 	 */
 	private void reInitializeMap() throws SlickException	{
 		if(map.getEntryPortal() != null)	{
